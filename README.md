@@ -1,3 +1,19 @@
+# Clinic Management System
+
+## 👨‍💻 Team Members
+| Name                                     | Matric No | Role                            |
+|------------------------------------------|-----------|---------------------------------|
+| Putri Aimi Batrisyia Binti Muhammad Yusri|  2320206  | Dashboard, Billing & Integration|
+| Niesa Batrisyia Binti Nor Hisham         | 2419714   | Appointment & Queue             |
+| Nurin Sofina Binti Yusdi                 | 2221372   | Patient Management              |
+| Nurul Aida Fatini Binti Mohd Rosli       | 2410416   | Authentication & Security       |
+| Nur Adawiyah Binti Zakaria               | 2417438   |  Prescriptions & Medications    |
+
+---
+
+## 🚀 Project Description
+The clinic management system is a web-based solution to improve the efficiency and organisation of daily healthcare operations. The system helps healthcare institutions manage patient records, appointments, prescriptions, medication inventory, and billing through a more centralised digital platform. It also provides role-based access for administrators, doctors, nurses, and receptionists to ensure secure and efficient system management. This web application adheres to Shariah principles such as transparency and justice by ensuring accurate medical data.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
