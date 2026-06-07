@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\AuditLog;
 
 class UserController extends Controller
 {
@@ -12,7 +13,12 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('users.index', compact('users'));
+        $totalUsers = User::count();
+        $totalDoctors = User::where('role', 'doctor')->count();
+        $totalNurses = User::where('role', 'nurse')->count();
+        $securityEvents = \App\Models\AuditLog::whereDate('created_at', today())->count();
+
+        return view('users.index', compact('users', 'totalUsers', 'totalDoctors', 'totalNurses', 'securityEvents'));
     }
 
     // Show create form
@@ -31,15 +37,25 @@ class UserController extends Controller
             'role'     => 'required|in:admin,doctor,nurse,receptionist',
         ]);
 
-        User::create([
+        $user = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => Hash::make($request->password),
             'role'     => $request->role,
         ]);
 
+        // Log the action
+        AuditLog::create([
+            'user_id'     => auth()->id(),
+            'user_name'   => auth()->user()->name,
+            'action'      => 'created',
+            'module'      => 'Users',
+            'description' => auth()->user()->name . ' created user: ' . $user->name,
+            'ip_address'  => $request->ip(),
+        ]);
+
         return redirect()->route('users.index')->with('success', 'User created successfully!');
-    }
+    }   
 
     // Show edit form
     public function edit(string $id)
@@ -65,6 +81,16 @@ class UserController extends Controller
             'role'  => $request->role,
         ]);
 
+        // Log the action
+        AuditLog::create([
+            'user_id'     => auth()->id(),
+            'user_name'   => auth()->user()->name,
+            'action'      => 'updated',
+            'module'      => 'Users',
+            'description' => auth()->user()->name . ' updated user: ' . $user->name,
+            'ip_address'  => $request->ip(),
+        ]);
+
         return redirect()->route('users.index')->with('success', 'User updated successfully!');
     }
 
@@ -72,14 +98,19 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
+
+        // Log the action before deleting
+        AuditLog::create([
+            'user_id'     => auth()->id(),
+            'user_name'   => auth()->user()->name,
+            'action'      => 'deleted',
+            'module'      => 'Users',
+            'description' => auth()->user()->name . ' deleted user: ' . $user->name,
+            'ip_address'  => request()->ip(),
+        ]);
+
         $user->delete();
 
         return redirect()->route('users.index')->with('success', 'User deleted successfully!');
-    }
-
-    public function show(string $id)
-    {
-        $user = User::findOrFail($id);
-        return view('users.show', compact('user'));
     }
 }
