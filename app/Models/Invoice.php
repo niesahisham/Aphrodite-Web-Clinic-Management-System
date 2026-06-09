@@ -23,13 +23,13 @@ class Invoice extends Model
         return $this->belongsTo(Patient::class);
     }
 
-    public function payments()
-    {
-        return $this->hasMany(Payment::class);
-    }
-
     public function appointment()
     {
         return $this->belongsTo(Appointment::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
     }
 }

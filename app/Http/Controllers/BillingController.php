@@ -27,8 +27,10 @@ class BillingController extends Controller
 
     public function generateInvoice($appointmentId, $patientId, $amount)
     {
+        $invoiceNumber = 'INV-' . strtoupper(uniqid());
+
         return Invoice::create([
-            'invoice_number' => 'INV-' . str_pad(Invoice::count() + 1, 6, '0', STR_PAD_LEFT),
+            'invoice_number' => $invoiceNumber,
             'appointment_id' => $appointmentId,
             'patient_id'     => $patientId,
             'total_amount'   => $amount,
