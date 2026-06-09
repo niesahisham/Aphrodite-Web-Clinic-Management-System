@@ -27,10 +27,11 @@ The clinic management system is a web-based solution to improve the efficiency a
 6. Billing & Payments (Can only be accessed by Admins and Receptionists)
 
 ## Technologies Used
-- **Framework:** Laravel
-- **Language:** PHP
+- **Framework:** Laravel 12
+- **Language:** PHP 8.2
 - **Database:** MySQL
 - **Frontend:** Blade Templating
+- **Build Tool:** Vite
 - **Version Control:** Github
 
 ## Roles and Permissions
@@ -85,6 +86,10 @@ The clinic management system is a web-based solution to improve the efficiency a
 ## Screenshots
 
 ## ERD
+
+
+
+
 
   
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
