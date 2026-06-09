@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function index()
     {
         $totalPatients     = Patient::count();
-        $todayAppointments = Appointment::whereDate('appointment_date', today())->count();
+        $todayAppointments = Appointment::whereDate('scheduled_at', today())->count();
         $unpaidInvoices    = Invoice::where('status', 'unpaid')->count();
         // Ask NuA what her Prescription model's status field is called, then add:
         // $pendingPrescriptions = Prescription::where('status', 'pending')->count();
