@@ -24,6 +24,7 @@
                 <th style="padding: 12px;">Form</th>
                 <th style="padding: 12px;">Dosage</th>
                 <th style="padding: 12px;">Strength</th>
+                <th style="padding: 12px; text-align: center;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -33,10 +34,22 @@
                     <td style="padding: 12px;">{{ $drug->form }}</td>
                     <td style="padding: 12px;">{{ $drug->dosage }}</td>
                     <td style="padding: 12px;">{{ $drug->strength }}</td>
+                    
+                    <td style="padding: 12px; text-align: center;">
+                        <div style="display: flex; justify-content: center; gap: 15px; align-items: center;">
+                            <a href="{{ route('drugs.edit', $drug->id) }}" style="color: #2563eb; text-decoration: none; font-weight: 500;">Edit</a>
+                            
+                            <form action="{{ route('drugs.destroy', $drug->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this drug from inventory?');" style="margin: 0;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" style="color: #dc2626; background: none; border: none; padding: 0; cursor: pointer; font-weight: 500; font-family: inherit;">Delete</button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4" style="padding: 12px; text-align: center; color: #6b7280;">No drugs registered in inventory yet.</td>
+                    <td colspan="5" style="padding: 12px; text-align: center; color: #6b7280;">No drugs registered in inventory yet.</td>
                 </tr>
             @endforelse
         </tbody>
