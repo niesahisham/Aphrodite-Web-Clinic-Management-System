@@ -27,8 +27,17 @@
 
     <div class="card p-3">
         <h6 class="mb-3">Recent Activity</h6>
-        {{-- Placeholder until NAF's audit_logs table is confirmed --}}
-        <p class="text-muted small mb-0">Activity feed will appear here once connected to audit_logs.</p>
+        
+        @forelse($recentActivity as $log)
+    <div class="d-flex justify-content-between small border-bottom py-2">
+        <span>{{ $log->description }}</span>
+        <span class="text-muted">{{ $log->created_at->diffForHumans() }}</span>
+    </div>
+
+    @empty
+    <p class="text-muted small mb-0">No activity yet.</p>
+
+    @endforelse
     </div>
 </div>
 @endsection

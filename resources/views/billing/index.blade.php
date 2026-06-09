@@ -18,7 +18,7 @@
                 @forelse($invoices as $inv)
                     <tr>
                         <td>INV-{{ str_pad($inv->id, 4, '0', STR_PAD_LEFT) }}</td>
-                        <td>{{ $inv->patient->name ?? '—' }}</td>
+                        <td>{{ $inv->patient->full_name ?? '—' }}</td>
                         <td>{{ number_format($inv->total_amount, 2) }}</td>
                         <td>
                             @if($inv->status == 'paid')

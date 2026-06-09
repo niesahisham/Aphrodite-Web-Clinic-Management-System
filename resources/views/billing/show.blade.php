@@ -4,9 +4,9 @@
 <div class="container-fluid px-4 py-3">
     <div class="d-flex align-items-center gap-3 mb-4">
         <h4 class="mb-0">INV-{{ str_pad($invoice->id, 4, '0', STR_PAD_LEFT) }}</h4>
-        @if($invoice->status == 'paid')
+        @if($invoice->payment_status == 'paid')
             <span class="badge bg-success">Paid</span>
-        @elseif($invoice->status == 'partial')
+        @elseif($invoice->payment_status == 'partial')
             <span class="badge bg-warning text-dark">Partial</span>
         @else
             <span class="badge bg-danger">Unpaid</span>
@@ -14,7 +14,7 @@
     </div>
 
     <p class="text-muted">
-        Patient: <strong>{{ $invoice->patient->name }}</strong> &nbsp;·&nbsp;
+        Patient: <strong>{{ $invoice->patient->full_name }}</strong> &nbsp;·&nbsp;
         Total: <strong>RM {{ number_format($invoice->total_amount, 2) }}</strong>
     </p>
 

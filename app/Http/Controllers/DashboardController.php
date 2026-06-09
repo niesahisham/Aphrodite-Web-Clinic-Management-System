@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Patient;
 use App\Models\Appointment;
 use App\Models\Invoice;
-
+use App\Models\AuditLog;
 
 class DashboardController extends Controller
 {
@@ -15,14 +15,14 @@ class DashboardController extends Controller
     {
         $totalPatients     = Patient::count();
         $todayAppointments = Appointment::whereDate('scheduled_at', today())->count();
-        $unpaidInvoices    = Invoice::where('status', 'unpaid')->count();
-        // Ask NuA what her Prescription model's status field is called, then add:
-        // $pendingPrescriptions = Prescription::where('status', 'pending')->count();
+        $unpaidInvoices    = Invoice::where('payment_status', 'unpaid')->count();
+        $recentActivity = AuditLog::latest()->take(5)->get();
 
         return view('dashboard.index', compact(
             'totalPatients',
             'todayAppointments',
-            'unpaidInvoices'
+            'unpaidInvoices',
+            'recentActivity'
         ));
     }
 }
