@@ -30,7 +30,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('audit-logs', [AuditLogController::class, 'index'])->name('audit.index');
 });
 
-Route::resource('drugs', DrugController::class);
-Route::resource('prescriptions', PrescriptionController::class);
+// Admin & Authorized Staff Only - User Management & Pharmacy
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('users', UserController::class);
+    Route::get('audit-logs', [AuditLogController::class, 'index'])->name('audit.index');
+    
+    // Secured Pharmacy Modules
+    Route::resource('drugs', DrugController::class);
+    Route::resource('prescriptions', PrescriptionController::class);
+});
 
 require __DIR__.'/auth.php';
