@@ -1,58 +1,58 @@
 @extends('layouts.app')
-
 @section('title', 'Drugs List - MediCare')
-
 @section('page-title', 'Pharmacy Inventory')
 
 @section('content')
-<div class="container" style="padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h2>Registered Medications</h2>
-        <a href="{{ route('drugs.create') }}" style="background: #2563eb; color: #fff; padding: 10px 15px; border-radius: 5px; text-decoration: none;">+ Add New Drug</a>
+
+<div class="flex justify-between items-center mb-6">
+    <h2 class="text-lg font-semibold text-gray-800">Registered Medications</h2>
+    <a href="{{ route('drugs.create') }}" 
+       class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm font-medium">
+        + Add New Drug
+    </a>
+</div>
+
+@if(session('success'))
+    <div class="bg-green-100 text-green-700 px-4 py-3 rounded-lg mb-4 text-sm">
+        {{ session('success') }}
     </div>
+@endif
 
-    @if(session('success'))
-        <div style="background: #d1fae5; color: #065f46; padding: 10px; margin-bottom: 20px; border-radius: 5px;">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    <table style="width: 100%; border-collapse: collapse; text-align: left;">
-        <thead>
-            <tr style="background: #f3f4f6; border-bottom: 2px solid #e5e7eb;">
-                <th style="padding: 12px;">Name</th>
-                <th style="padding: 12px;">Form</th>
-                <th style="padding: 12px;">Dosage</th>
-                <th style="padding: 12px;">Strength</th>
-                <th style="padding: 12px; text-align: center;">Actions</th>
+<div class="bg-white rounded-xl shadow overflow-hidden">
+    <table class="w-full text-sm text-left">
+        <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
+            <tr>
+                <th class="px-6 py-3">Name</th>
+                <th class="px-6 py-3">Form</th>
+                <th class="px-6 py-3">Strength</th>
+                <th class="px-6 py-3 text-center">Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="divide-y divide-gray-100">
             @forelse($drugs as $drug)
-                <tr style="border-bottom: 1px solid #e5e7eb;">
-                    <td style="padding: 12px; font-weight: bold;">{{ $drug->name }}</td>
-                    <td style="padding: 12px;">{{ $drug->form }}</td>
-                    <td style="padding: 12px;">{{ $drug->dosage }}</td>
-                    <td style="padding: 12px;">{{ $drug->strength }}</td>
-                    
-                    <td style="padding: 12px; text-align: center;">
-                        <div style="display: flex; justify-content: center; gap: 15px; align-items: center;">
-                            <a href="{{ route('drugs.edit', $drug->id) }}" style="color: #2563eb; text-decoration: none; font-weight: 500;">Edit</a>
-                            
-                            <form action="{{ route('drugs.destroy', $drug->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this drug from inventory?');" style="margin: 0;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" style="color: #dc2626; background: none; border: none; padding: 0; cursor: pointer; font-weight: 500; font-family: inherit;">Delete</button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
+            <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 font-medium">{{ $drug->name }}</td>
+                <td class="px-6 py-4">{{ $drug->dosage_form }}</td>
+                <td class="px-6 py-4">{{ $drug->strength }}</td>
+                <td class="px-6 py-4 flex justify-center gap-4">
+                    <a href="{{ route('drugs.edit', $drug->id) }}" 
+                       class="text-blue-600 hover:underline">Edit</a>
+                    <form action="{{ route('drugs.destroy', $drug->id) }}" method="POST"
+                          onsubmit="return confirm('Delete this drug?')">
+                        @csrf @method('DELETE')
+                        <button type="submit" class="text-red-600 hover:underline">Delete</button>
+                    </form>
+                </td>
+            </tr>
             @empty
-                <tr>
-                    <td colspan="5" style="padding: 12px; text-align: center; color: #6b7280;">No drugs registered in inventory yet.</td>
-                </tr>
+            <tr>
+                <td colspan="4" class="px-6 py-8 text-center text-gray-400">
+                    No drugs registered yet.
+                </td>
+            </tr>
             @endforelse
         </tbody>
     </table>
 </div>
+
 @endsection

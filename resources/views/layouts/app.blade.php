@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'MediCare System')</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-100">
     <div class="flex h-screen overflow-hidden">
@@ -47,16 +47,6 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                         Patient Management
-                    </a>
-
-                    {{-- Appointments - all roles --}}
-                    <a href="#"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium
-                        {{ request()->routeIs('appointments.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        Appointments
                     </a>
 
                     {{-- Appointments - all roles --}}
@@ -103,9 +93,22 @@
                     </a>
                     @endif
 
+                    {{-- Drugs / Pharmacy - admin and doctor only --}}
+                    @if(in_array(Auth::user()->role, ['admin', 'doctor']))
+                        <a href="{{ route('drugs.index') }}"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium
+                        {{ request()->routeIs('drugs.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V9m-6-6v6m0 0H9m4 0h4" />
+                        </svg>
+                        Pharmacy
+                        </a>
+                        @endif
+                        
                     {{-- Billing & Payments - admin and receptionist only --}}
                     @if(in_array(Auth::user()->role, ['admin', 'receptionist']))
-                    <a href="#"
+                    <a href="{{ route('invoices.index') }}"
                         class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium
                         {{ request()->routeIs('invoices.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

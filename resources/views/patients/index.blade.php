@@ -8,13 +8,8 @@
 
     {{-- Header Actions --}}
     <div class="flex justify-between items-center mb-6">
-        @if(Auth::user()->role !== 'admin')
-        <a href="{{ route('patients.create') }}"
-            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm font-medium">
-            + New Patient
-        </a>
-        @else
-        <div></div>
+        @if(Auth::user()->role !== 'receptionist')
+            <a href="{{ route('patients.create') }}">+ New Patient</a>
         @endif
     </div>
 
@@ -74,12 +69,6 @@
                         @if(Auth::user()->role !== 'admin')
                         <a href="{{ route('patients.edit', $patient) }}"
                             class="text-yellow-600 hover:underline">Edit</a>
-                        <form action="{{ route('patients.destroy', $patient) }}" method="POST"
-                            onsubmit="return confirm('Delete this patient?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:underline">Delete</button>
-                        </form>
                         @endif
                     </td>
                 </tr>

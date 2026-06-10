@@ -8,9 +8,11 @@
 <div class="container" style="max-width: 600px; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin: 0 auto;">
     <h2 style="margin-bottom: 20px;">Prescription Form</h2>
 
-    @if(session('error'))
-        <div style="background: #fee2e2; color: #991b1b; padding: 15px; margin-bottom: 20px; border-radius: 5px; font-weight: bold; border: 1px solid #f87171;">
-            {{ session('error') }}
+    @if($errors->any())
+        <div style="background:#fee2e2;color:#991b1b;padding:15px;margin-bottom:20px;border-radius:5px;">
+            @foreach($errors->all() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
         </div>
     @endif
 
@@ -21,7 +23,7 @@
             <select name="patient_id" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
                 <option value="">-- Choose Patient --</option>
                 @foreach($patients as $patient)
-                    <option value="{{ $patient->id }}">{{ $patient->name }} (Allergies: {{ $patient->allergies ?? 'None' }})</option>
+                    <option value="{{ $patient->id }}">{{ $patient->full_name }} (Allergies: {{ $patient->allergies ?? 'None' }})</option>
                 @endforeach
             </select>
         </div>
@@ -31,7 +33,7 @@
             <select name="drug_id" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
                 <option value="">-- Choose Drug --</option>
                 @foreach($drugs as $drug)
-                    <option value="{{ $drug->id }}">{{ $drug->name }} - {{ $drug->dosage }}</option>
+                    <option value="{{ $drug->id }}">{{ $drug->name }} - {{ $drug->strength }}</option>
                 @endforeach
             </select>
         </div>

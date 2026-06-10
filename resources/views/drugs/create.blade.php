@@ -17,7 +17,7 @@
 
         <div style="margin-bottom: 15px;">
             <label style="display: block; margin-bottom: 5px; font-weight: bold;">Form:</label>
-            <input type="text" name="form" placeholder="e.g., Tablet, Capsule, Syrup" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+            <input type="text" name="dosage_form" placeholder="e.g., Tablet, Capsule, Syrup" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
         </div>
 
         <div style="margin-bottom: 15px;">

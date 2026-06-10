@@ -10,38 +10,39 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\QueueController;
 use App\Http\Controllers\MedicalRecordController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\BillingController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+    Route::get('/invoices', [BillingController::class, 'index'])->name('invoices.index');
+    Route::get('/invoices/{id}', [BillingController::class, 'show'])->name('invoices.show');
+    Route::post('/invoices/{id}/pay', [BillingController::class, 'recordPayment'])->name('invoices.pay');
     Route::resource('patients', PatientController::class);
 });
 
-// Admin only - User Management
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::resource('users', UserController::class);
-    Route::get('audit-logs', [AuditLogController::class, 'index'])->name('audit.index');
-});
 
 // Admin & Authorized Staff Only - User Management & Pharmacy
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('users', UserController::class);
     Route::get('audit-logs', [AuditLogController::class, 'index'])->name('audit.index');
     
-    // Secured Pharmacy Modules
-    Route::resource('drugs', DrugController::class);
+});
+
+// Prescriptions — accessible by admin, doctor, nurse
+Route::middleware(['auth', 'role:admin,doctor,nurse'])->group(function () {
     Route::resource('prescriptions', PrescriptionController::class);
+});
+
+// Drugs — accessible by admin and doctor
+Route::middleware(['auth', 'role:admin,doctor'])->group(function () {
+    Route::resource('drugs', DrugController::class);
 });
 
 // Appointment & Queue module
@@ -57,6 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('queue/{appointment}/call', [QueueController::class, 'call'])->name('queue.call');
     Route::patch('queue/{appointment}/complete', [QueueController::class, 'complete'])->name('queue.complete');
     Route::patch('queue/{appointment}/cancel', [QueueController::class, 'cancel'])->name('queue.cancel');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('queue-display', [QueueController::class, 'display'])->name('queue.display');
     Route::get('queue-display/data', [QueueController::class, 'boardData'])->name('queue.board-data');
 });

@@ -1,34 +1,35 @@
 @extends('layouts.app')
 
+@section('title', 'Dashboard - MediCare')
+@section('page-title', 'Dashboard Overview')
+
 @section('content')
-<div class="container-fluid px-4 py-3">
-    <h4 class="mb-4">Dashboard</h4>
 
-    <div class="row g-3 mb-4">
-        <div class="col-md-4">
-            <div class="card text-center p-3">
-                <p class="text-muted mb-1 small">Total Patients</p>
-                <h3 class="fw-semibold mb-0">{{ $totalPatients }}</h3>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-center p-3">
-                <p class="text-muted mb-1 small">Today's Appointments</p>
-                <h3 class="fw-semibold mb-0">{{ $todayAppointments }}</h3>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-center p-3">
-                <p class="text-muted mb-1 small">Unpaid Invoices</p>
-                <h3 class="fw-semibold mb-0 text-danger">{{ $unpaidInvoices }}</h3>
-            </div>
-        </div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div class="bg-white rounded-xl shadow p-5 text-center">
+        <p class="text-gray-500 text-sm">Total Patients</p>
+        <h3 class="text-3xl font-bold text-gray-800">{{ $totalPatients }}</h3>
     </div>
-
-    <div class="card p-3">
-        <h6 class="mb-3">Recent Activity</h6>
-        {{-- Placeholder until NAF's audit_logs table is confirmed --}}
-        <p class="text-muted small mb-0">Activity feed will appear here once connected to audit_logs.</p>
+    <div class="bg-white rounded-xl shadow p-5 text-center">
+        <p class="text-gray-500 text-sm">Today's Appointments</p>
+        <h3 class="text-3xl font-bold text-gray-800">{{ $todayAppointments }}</h3>
+    </div>
+    <div class="bg-white rounded-xl shadow p-5 text-center">
+        <p class="text-gray-500 text-sm">Unpaid Invoices</p>
+        <h3 class="text-3xl font-bold text-red-600">{{ $unpaidInvoices }}</h3>
     </div>
 </div>
+
+<div class="bg-white rounded-xl shadow p-6">
+    <h6 class="text-sm font-semibold text-gray-700 mb-4">Recent Activity</h6>
+    @forelse($recentActivity as $log)
+        <div class="flex justify-between text-sm border-b border-gray-100 py-2">
+            <span class="text-gray-700">{{ $log->description }}</span>
+            <span class="text-gray-400">{{ $log->created_at->diffForHumans() }}</span>
+        </div>
+    @empty
+        <p class="text-gray-400 text-sm">No activity yet.</p>
+    @endforelse
+</div>
+
 @endsection

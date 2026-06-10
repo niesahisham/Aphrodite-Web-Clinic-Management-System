@@ -1,71 +1,72 @@
 @extends('layouts.app')
 
+@section('title', 'Invoice Details - MediCare')
+@section('page-title', 'Invoice Details')
+
 @section('content')
-<div class="container-fluid px-4 py-3">
-    <div class="d-flex align-items-center gap-3 mb-4">
-        <h4 class="mb-0">INV-{{ str_pad($invoice->id, 4, '0', STR_PAD_LEFT) }}</h4>
-        @if($invoice->status == 'paid')
-            <span class="badge bg-success">Paid</span>
-        @elseif($invoice->status == 'partial')
-            <span class="badge bg-warning text-dark">Partial</span>
-        @else
-            <span class="badge bg-danger">Unpaid</span>
-        @endif
+
+<div class="bg-white rounded-xl shadow p-6 max-w-3xl">
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h2 class="text-xl font-bold text-gray-800">{{ $invoice->invoice_number }}</h2>
+            <p class="text-sm text-gray-400">{{ $invoice->patient->full_name }}</p>
+        </div>
+        <span class="px-3 py-1 rounded-full text-xs font-medium
+            {{ $invoice->payment_status === 'paid' ? 'bg-green-100 text-green-700' : '' }}
+            {{ $invoice->payment_status === 'unpaid' ? 'bg-red-100 text-red-700' : '' }}
+            {{ $invoice->payment_status === 'partial' ? 'bg-yellow-100 text-yellow-700' : '' }}">
+            {{ ucfirst($invoice->payment_status) }}
+        </span>
     </div>
 
-    <p class="text-muted">
-        Patient: <strong>{{ $invoice->patient->name }}</strong> &nbsp;·&nbsp;
-        Total: <strong>RM {{ number_format($invoice->total_amount, 2) }}</strong>
-    </p>
+    <div class="grid grid-cols-2 gap-4 text-sm mb-6">
+        <div><p class="text-gray-400">Total Amount</p>
+             <p class="font-medium">RM {{ number_format($invoice->total_amount, 2) }}</p></div>
+        <div><p class="text-gray-400">Paid Amount</p>
+             <p class="font-medium">RM {{ number_format($invoice->paid_amount, 2) }}</p></div>
+        <div><p class="text-gray-400">Balance Due</p>
+             <p class="font-medium text-red-600">RM {{ number_format($invoice->total_amount - $invoice->paid_amount, 2) }}</p></div>
+        <div><p class="text-gray-400">Issued At</p>
+             <p class="font-medium">{{ \Carbon\Carbon::parse($invoice->issued_at)->format('d M Y, h:i A') }}</p></div>
+    </div>
 
-    <div class="row g-3">
-        <div class="col-md-7">
-            <div class="card p-3">
-                <h6 class="mb-3">Payment History</h6>
-                <table class="table table-sm">
-                    <thead><tr><th>Amount</th><th>Method</th><th>Date</th></tr></thead>
-                    <tbody>
-                    @forelse($invoice->payments as $payment)
-                        <tr>
-                            <td>RM {{ number_format($payment->amount_paid, 2) }}</td>
-                            <td>{{ ucfirst($payment->payment_method) }}</td>
-                            <td>{{ $payment->paid_at?->format('d M Y, H:i') }}</td>
-                        </tr>
-                    @empty
-                        <tr><td colspan="3" class="text-muted">No payments recorded.</td></tr>
-                    @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    {{-- Payment History --}}
+    <h3 class="text-sm font-semibold text-gray-600 mb-3">Payment History</h3>
+    @forelse($invoice->payments as $payment)
+    <div class="flex justify-between items-center py-2 border-b border-gray-100 text-sm">
+        <span>{{ ucfirst($payment->payment_method) }}</span>
+        <span>RM {{ number_format($payment->amount_paid, 2) }}</span>
+        <span class="text-gray-400">{{ \Carbon\Carbon::parse($payment->paid_at)->format('d M Y') }}</span>
+    </div>
+    @empty
+    <p class="text-gray-400 text-sm">No payments recorded yet.</p>
+    @endforelse
 
-        @if($invoice->status !== 'paid')
-        <div class="col-md-5">
-            <div class="card p-3">
-                <h6 class="mb-3">Record a Payment</h6>
-                @if(session('success'))
-                    <div class="alert alert-success py-2">{{ session('success') }}</div>
-                @endif
-                <form method="POST" action="{{ route('invoices.pay', $invoice->id) }}">
-                    @csrf
-                    <div class="mb-2">
-                        <label class="form-label small">Amount (RM)</label>
-                        <input type="number" step="0.01" name="amount_paid"
-                               class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small">Payment Method</label>
-                        <select name="payment_method" class="form-select">
-                            <option value="cash">Cash</option>
-                            <option value="card">Card</option>
-                            <option value="online">Online Transfer</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Save Payment</button>
-                </form>
-            </div>
-        </div>
-        @endif
+    {{-- Record Payment Form --}}
+    @if($invoice->payment_status !== 'paid')
+    <div class="mt-6 border-t pt-4">
+        <h3 class="text-sm font-semibold text-gray-600 mb-3">Record Payment</h3>
+        <form action="{{ route('invoices.pay', $invoice->id) }}" method="POST" class="flex gap-3 flex-wrap">
+            @csrf
+            <input type="number" name="amount_paid" step="0.01" placeholder="Amount (RM)"
+                class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <select name="payment_method" class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                <option value="cash">Cash</option>
+                <option value="card">Card</option>
+                <option value="online">Online</option>
+            </select>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm font-medium">
+                Record Payment
+            </button>
+        </form>
+    </div>
+    @endif
+
+    <div class="mt-6">
+        <a href="{{ route('invoices.index') }}" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 text-sm font-medium">
+            Back
+        </a>
     </div>
 </div>
+
 @endsection

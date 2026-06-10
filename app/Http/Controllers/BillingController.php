@@ -25,21 +25,29 @@ class BillingController extends Controller
         return view('billing.show', compact('invoice'));
     }
 
-    // Auto-generate an invoice — NiB will call this from her AppointmentController
     public function generateInvoice($appointmentId, $patientId, $amount)
-    {
-        return Invoice::create([
-            'appointment_id' => $appointmentId,
-            'patient_id'     => $patientId,
-            'total_amount'   => $amount,
-            'status'         => 'unpaid',
-        ]);
-    }
+{
+    $invoiceNumber = 'INV-' . strtoupper(uniqid());
+
+    return Invoice::create([
+        'invoice_number' => $invoiceNumber,
+        'appointment_id' => $appointmentId,
+        'patient_id'     => $patientId,
+        'total_amount'   => $amount,
+        'payment_status' => 'unpaid',
+        'handled_by'     => auth()->id(), 
+    ]);
+}
 
     // Record a payment and recalculate the invoice status
     public function recordPayment(Request $request, $id)
     {
         $invoice = Invoice::findOrFail($id);
+
+        $request->validate([
+            'amount_paid'    => 'required|numeric|min:0.01',
+            'payment_method' => 'required|in:cash,card,online',
+        ]);
 
         Payment::create([
             'invoice_id'     => $invoice->id,
@@ -50,11 +58,11 @@ class BillingController extends Controller
 
         $totalPaid = $invoice->payments()->sum('amount_paid');
 
-        if ($totalPaid >= $invoice->total_amount) {
-            $invoice->update(['status' => 'paid']);
-        } elseif ($totalPaid > 0) {
-            $invoice->update(['status' => 'partial']);
-        }
+        $invoice->update([
+            'paid_amount'    => $totalPaid,
+            'payment_status' => $totalPaid >= $invoice->total_amount ? 'paid'
+                            : ($totalPaid > 0 ? 'partial' : 'unpaid'),
+        ]);
 
         return redirect()->route('invoices.show', $invoice->id)
                         ->with('success', 'Payment recorded successfully.');

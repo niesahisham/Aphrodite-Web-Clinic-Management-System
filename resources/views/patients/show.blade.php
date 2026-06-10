@@ -76,6 +76,7 @@
             Edit Patient
         </a>
         
+<<<<<<< HEAD
         <form action="{{ route('patients.destroy', $patient) }}" method="POST"
             onsubmit="return confirm('Delete this patient?')">
             @csrf
@@ -85,6 +86,8 @@
                 Delete Patient
             </button>
         </form>
+=======
+>>>>>>> 8c2666ffbde2af9f715030ea2902a6de7614c89c
         @endif
     </div>
 

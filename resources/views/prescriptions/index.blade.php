@@ -30,11 +30,21 @@
         <tbody>
             @forelse($prescriptions as $p)
                 <tr style="border-bottom: 1px solid #e5e7eb;">
-                    <td style="padding: 12px;">{{ $p->id }}</td>
-                    <td style="padding: 12px;">{{ $p->patient->name }}</td>
-                    <td style="padding: 12px; font-weight: bold;">{{ $p->drug->name }}</td>
-                    <td style="padding: 12px;">{{ $p->dosage_instructions }}</td>
-                    <td style="padding: 12px;">{{ $p->duration }}</td>
+                <td style="padding: 12px;">{{ $p->id }}</td>
+                <td style="padding: 12px;">{{ $p->patient->full_name }}</td>
+                <td style="padding: 12px; font-weight: bold;">
+                    {{-- Prescriptions link to items, not directly to a drug --}}
+                    {{ $p->items->count() }} medication(s)
+                </td>
+                
+                <td style="padding: 12px;">
+                <span class="px-2 py-1 rounded text-xs
+                    {{ $p->status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600' }}">
+                    {{ ucfirst($p->status) }}
+                </span>
+                </td>
+        
+                <td style="padding: 12px;">{{ \Carbon\Carbon::parse($p->issued_at)->format('d M Y') }}</td>
                 </tr>
             @empty
                 <tr>

@@ -1,47 +1,57 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container-fluid px-4 py-3">
-    <h4 class="mb-4">Invoices</h4>
+@section('title', 'Billing & Payments - MediCare')
+@section('page-title', 'Billing & Payments')
 
-    <div class="card">
-        <div class="card-body p-0">
-            <table class="table table-hover mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th>Invoice No.</th><th>Patient</th>
-                        <th>Amount (RM)</th><th>Status</th>
-                        <th>Date</th><th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                @forelse($invoices as $inv)
-                    <tr>
-                        <td>INV-{{ str_pad($inv->id, 4, '0', STR_PAD_LEFT) }}</td>
-                        <td>{{ $inv->patient->name ?? '—' }}</td>
-                        <td>{{ number_format($inv->total_amount, 2) }}</td>
-                        <td>
-                            @if($inv->status == 'paid')
-                                <span class="badge bg-success">Paid</span>
-                            @elseif($inv->status == 'partial')
-                                <span class="badge bg-warning text-dark">Partial</span>
-                            @else
-                                <span class="badge bg-danger">Unpaid</span>
-                            @endif
-                        </td>
-                        <td>{{ $inv->created_at->format('d M Y') }}</td>
-                        <td>
-                            <a href="{{ route('invoices.show', $inv->id) }}"
-                               class="btn btn-sm btn-outline-primary">View</a>
-                        </td>
-                    </tr>
-                @empty
-                    <tr><td colspan="6" class="text-center text-muted py-4">No invoices yet.</td></tr>
-                @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="mt-3">{{ $invoices->links() }}</div>
+@section('content')
+
+@if(session('success'))
+<div class="bg-green-100 text-green-700 px-4 py-3 rounded-lg mb-4 text-sm">
+    {{ session('success') }}
 </div>
+@endif
+
+<div class="bg-white rounded-xl shadow overflow-hidden">
+    <table class="w-full text-sm text-left">
+        <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
+            <tr>
+                <th class="px-6 py-3">Invoice No.</th>
+                <th class="px-6 py-3">Patient</th>
+                <th class="px-6 py-3">Total (RM)</th>
+                <th class="px-6 py-3">Paid (RM)</th>
+                <th class="px-6 py-3">Status</th>
+                <th class="px-6 py-3">Issued</th>
+                <th class="px-6 py-3">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            @forelse($invoices as $invoice)
+            <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 font-medium">{{ $invoice->invoice_number }}</td>
+                <td class="px-6 py-4">{{ $invoice->patient->full_name }}</td>
+                <td class="px-6 py-4">{{ number_format($invoice->total_amount, 2) }}</td>
+                <td class="px-6 py-4">{{ number_format($invoice->paid_amount, 2) }}</td>
+                <td class="px-6 py-4">
+                    <span class="px-2 py-1 rounded-full text-xs font-medium
+                        {{ $invoice->payment_status === 'paid' ? 'bg-green-100 text-green-700' : '' }}
+                        {{ $invoice->payment_status === 'unpaid' ? 'bg-red-100 text-red-700' : '' }}
+                        {{ $invoice->payment_status === 'partial' ? 'bg-yellow-100 text-yellow-700' : '' }}">
+                        {{ ucfirst($invoice->payment_status) }}
+                    </span>
+                </td>
+                <td class="px-6 py-4">{{ \Carbon\Carbon::parse($invoice->issued_at)->format('d M Y') }}</td>
+                <td class="px-6 py-4 flex gap-2">
+                    <a href="{{ route('invoices.show', $invoice) }}" class="text-blue-600 hover:underline">View</a>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="7" class="px-6 py-8 text-center text-gray-400">No invoices found.</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+    <div class="p-4">{{ $invoices->links() }}</div>
+</div>
+
 @endsection

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Invoice;
+use App\Http\Controllers\BillingController;
 use Illuminate\Http\Request;
 
 class QueueController extends Controller
@@ -59,10 +61,20 @@ class QueueController extends Controller
     public function complete(Appointment $appointment)
     {
         $appointment->update([
-            'status' => 'completed',
+            'status'       => 'completed',
             'queue_status' => 'completed',
             'completed_at' => now(),
         ]);
+
+        // Auto-generate invoice if one doesn't exist
+        $exists = Invoice::where('appointment_id', $appointment->id)->exists();
+        if (!$exists) {
+            app(BillingController::class)->generateInvoice(
+                $appointment->id,
+                $appointment->patient_id,
+                100.00 // default or configurable amount
+            );
+        }
 
         return redirect()->route('queue.index')->with('success', 'Queue completed successfully!');
     }

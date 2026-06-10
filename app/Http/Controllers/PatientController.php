@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PatientController extends Controller
 {
+    
     // Show all patients
     public function index(Request $request)
     {
-        $search = $request->query('search');
+        $search = $request->query('search', '');
 
         $patients = Patient::when($search, function ($query, $search) {
             $query->where('full_name', 'like', "%{$search}%")
@@ -24,12 +25,14 @@ class PatientController extends Controller
     // Show form to create new patient
     public function create()
     {
+        if (auth()->user()->role === 'admin') abort(403);
         return view('patients.create');
     }
 
     // Save new patient to database
     public function store(Request $request)
     {
+        if (auth()->user()->role === 'admin') abort(403);
         $request->validate([
             'full_name' => 'required|string|max:255',
             'dob'       => 'required|date',
@@ -41,9 +44,10 @@ class PatientController extends Controller
         ]);
 
         // Auto-generate patient code
-        $count = Patient::count() + 1;
-        $patientCode = 'P' . str_pad($count, 3, '0', STR_PAD_LEFT);
-
+        $lastPatient = Patient::orderBy('id', 'desc')->first();
+        $nextNumber = $lastPatient ? ((int) substr($lastPatient->patient_code, 1)) + 1 : 1;
+        $patientCode = 'P' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+        
         Patient::create([
             'patient_code' => $patientCode,
             'full_name'    => $request->full_name,
@@ -70,12 +74,14 @@ class PatientController extends Controller
     // Show form to edit patient
     public function edit(Patient $patient)
     {
+        if (auth()->user()->role === 'admin') abort(403);
         return view('patients.edit', compact('patient'));
     }
 
     // Update patient in database
     public function update(Request $request, Patient $patient)
     {
+        if (auth()->user()->role === 'admin') abort(403);
         $request->validate([
             'full_name' => 'required|string|max:255',
             'dob'       => 'required|date',
@@ -98,7 +104,6 @@ class PatientController extends Controller
     // Delete patient
     public function destroy(Patient $patient)
     {
-        $patient->delete();
-        return redirect()->route('patients.index')->with('success', 'Patient deleted successfully!');
-    }
+        abort(403, 'Patients cannot be deleted. Set status to Inactive instead.');
+    } 
 }
