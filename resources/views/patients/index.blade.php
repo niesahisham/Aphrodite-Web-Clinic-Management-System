@@ -66,15 +66,9 @@
                     <td class="px-6 py-4 flex gap-2">
                         <a href="{{ route('patients.show', $patient) }}"
                             class="text-blue-600 hover:underline">View</a>
-                        @if(Auth::user()->role !== 'receptionist')
+                        @if(Auth::user()->role !== 'admin')
                         <a href="{{ route('patients.edit', $patient) }}"
                             class="text-yellow-600 hover:underline">Edit</a>
-                        <form action="{{ route('patients.destroy', $patient) }}" method="POST"
-                            onsubmit="return confirm('Delete this patient?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:underline">Delete</button>
-                        </form>
                         @endif
                     </td>
                 </tr>

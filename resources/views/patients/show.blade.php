@@ -64,20 +64,12 @@
             class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 text-sm font-medium">
             Back
         </a>
-        @if(Auth::user()->role !== 'receptionist')
+        @if(Auth::user()->role !== 'admin')
         <a href="{{ route('patients.edit', $patient) }}"
             class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600 text-sm font-medium">
             Edit Patient
         </a>
-        <form action="{{ route('patients.destroy', $patient) }}" method="POST"
-            onsubmit="return confirm('Delete this patient?')">
-            @csrf
-            @method('DELETE')
-            <button type="submit"
-                class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 text-sm font-medium">
-                Delete Patient
-            </button>
-        </form>
+        
         @endif
     </div>
 

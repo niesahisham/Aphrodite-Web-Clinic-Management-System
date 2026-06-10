@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PatientController extends Controller
 {
+    
     // Show all patients
     public function index(Request $request)
     {
@@ -24,12 +25,14 @@ class PatientController extends Controller
     // Show form to create new patient
     public function create()
     {
+        if (auth()->user()->role === 'admin') abort(403);
         return view('patients.create');
     }
 
     // Save new patient to database
     public function store(Request $request)
     {
+        if (auth()->user()->role === 'admin') abort(403);
         $request->validate([
             'full_name' => 'required|string|max:255',
             'dob'       => 'required|date',
@@ -71,12 +74,14 @@ class PatientController extends Controller
     // Show form to edit patient
     public function edit(Patient $patient)
     {
+        if (auth()->user()->role === 'admin') abort(403);
         return view('patients.edit', compact('patient'));
     }
 
     // Update patient in database
     public function update(Request $request, Patient $patient)
     {
+        if (auth()->user()->role === 'admin') abort(403);
         $request->validate([
             'full_name' => 'required|string|max:255',
             'dob'       => 'required|date',
@@ -99,13 +104,6 @@ class PatientController extends Controller
     // Delete patient
     public function destroy(Patient $patient)
     {
-        // Admin, doctor, nurse, receptionist can all manage patients per README
-        // But delete should be restricted — admin should be able to delete too
-        if (Auth::user()->role === 'receptionist') {
-            abort(403, 'Receptionists cannot delete patients.');
-        }
-
-        $patient->delete();
-        return redirect()->route('patients.index')->with('success', 'Patient deleted successfully!');
+        abort(403, 'Patients cannot be deleted. Set status to Inactive instead.');
     } 
 }
