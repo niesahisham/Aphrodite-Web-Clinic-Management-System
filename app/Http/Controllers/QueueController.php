@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Invoice;
+use App\Http\Controllers\BillingController;
 use Illuminate\Http\Request;
 
 class QueueController extends Controller

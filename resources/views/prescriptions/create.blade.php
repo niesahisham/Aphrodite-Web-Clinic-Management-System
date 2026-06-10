@@ -33,7 +33,7 @@
             <select name="drug_id" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
                 <option value="">-- Choose Drug --</option>
                 @foreach($drugs as $drug)
-                    <option value="{{ $drug->id }}">{{ $drug->name }} - {{ $drug->dosage }}</option>
+                    <option value="{{ $drug->id }}">{{ $drug->name }} - {{ $drug->strength }}</option>
                 @endforeach
             </select>
         </div>

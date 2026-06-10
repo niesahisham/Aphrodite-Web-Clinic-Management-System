@@ -21,6 +21,13 @@ class UserController extends Controller
         return view('users.index', compact('users', 'totalUsers', 'totalDoctors', 'totalNurses', 'securityEvents'));
     }
 
+    // Show single user
+    public function show(string $id)
+    {
+        $user = User::findOrFail($id);
+        return view('users.show', compact('user'));
+    }
+
     // Show create form
     public function create()
     {

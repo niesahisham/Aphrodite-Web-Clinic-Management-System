@@ -70,9 +70,8 @@ class DrugController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'dosage_form' => 'required|string',
-            'dosage' => 'required|string',
-            'strength' => 'required|string',
+            'dosage_form' => 'required|string|max:100',
+            'strength' => 'required|string|max:100',
         ]);
 
         $drug->update($request->all());

@@ -30,12 +30,6 @@
                 style="width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;">
         </div>
 
-        <div style="margin-bottom: 15px;">
-            <label style="display:block;margin-bottom:5px;font-weight:bold;">Dosage:</label>
-            <input type="text" name="dosage" value="{{ old('dosage', $drug->dosage) }}" required
-                style="width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;">
-        </div>
-
         <div style="margin-bottom: 20px;">
             <label style="display:block;margin-bottom:5px;font-weight:bold;">Strength:</label>
             <input type="text" name="strength" value="{{ old('strength', $drug->strength) }}" required

@@ -81,6 +81,19 @@
                     </a>
                     @endif
 
+                    {{-- Drugs / Pharmacy - admin and doctor only --}}
+                    @if(in_array(Auth::user()->role, ['admin', 'doctor']))
+                        <a href="{{ route('drugs.index') }}"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium
+                        {{ request()->routeIs('drugs.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V9m-6-6v6m0 0H9m4 0h4" />
+                        </svg>
+                        Pharmacy
+                        </a>
+                        @endif
+                        
                     {{-- Billing & Payments - admin and receptionist only --}}
                     @if(in_array(Auth::user()->role, ['admin', 'receptionist']))
                     <a href="{{ route('invoices.index') }}"

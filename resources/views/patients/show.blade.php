@@ -64,7 +64,7 @@
             class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 text-sm font-medium">
             Back
         </a>
-        @if(Auth::user()->role !== 'admin')
+        @if(Auth::user()->role !== 'receptionist')
         <a href="{{ route('patients.edit', $patient) }}"
             class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600 text-sm font-medium">
             Edit Patient

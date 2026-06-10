@@ -26,17 +26,18 @@ class BillingController extends Controller
     }
 
     public function generateInvoice($appointmentId, $patientId, $amount)
-    {
-        $invoiceNumber = 'INV-' . strtoupper(uniqid());
+{
+    $invoiceNumber = 'INV-' . strtoupper(uniqid());
 
-        return Invoice::create([
-            'invoice_number' => $invoiceNumber,
-            'appointment_id' => $appointmentId,
-            'patient_id'     => $patientId,
-            'total_amount'   => $amount,
-            'payment_status' => 'unpaid',
-        ]);
-    }
+    return Invoice::create([
+        'invoice_number' => $invoiceNumber,
+        'appointment_id' => $appointmentId,
+        'patient_id'     => $patientId,
+        'total_amount'   => $amount,
+        'payment_status' => 'unpaid',
+        'handled_by'     => auth()->id(), 
+    ]);
+}
 
     // Record a payment and recalculate the invoice status
     public function recordPayment(Request $request, $id)
