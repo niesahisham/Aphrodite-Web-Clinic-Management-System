@@ -9,7 +9,8 @@ class Drug extends Model
     protected $fillable = [
     'name',
     'category',
-    'dosage_form',  // was 'form' in controller — fix the controller too
+    'dosage_form',
+    'dosage',  
     'strength',
     'unit_price',
     'contraindications',

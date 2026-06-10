@@ -21,7 +21,7 @@
             <select name="patient_id" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
                 <option value="">-- Choose Patient --</option>
                 @foreach($patients as $patient)
-                    <option value="{{ $patient->id }}">{{ $patient->name }} (Allergies: {{ $patient->allergies ?? 'None' }})</option>
+                    <option value="{{ $patient->id }}">{{ $patient->full_name }} (Allergies: {{ $patient->allergies ?? 'None' }})</option>
                 @endforeach
             </select>
         </div>

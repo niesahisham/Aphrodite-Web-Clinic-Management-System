@@ -98,14 +98,12 @@ class PatientController extends Controller
     // Delete patient
     public function destroy(Patient $patient)
     {
-        if (Auth::user()->role === 'admin') {
-            abort(403, 'Admins cannot delete patients.');
-        }
-        // or restrict to specific roles:
+        // Only doctors and nurses can delete; admins cannot
         if (!in_array(Auth::user()->role, ['doctor', 'nurse'])) {
-            abort(403, 'Unauthorized.');
+            abort(403, 'Unauthorized. Only doctors and nurses can delete patients.');
         }
+        
         $patient->delete();
         return redirect()->route('patients.index')->with('success', 'Patient deleted successfully!');
-    }   
+    }  
 }

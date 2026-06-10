@@ -19,18 +19,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource('/invoices', BillingController::class);
+    Route::get('/invoices', [BillingController::class, 'index'])->name('invoices.index');
+    Route::get('/invoices/{id}', [BillingController::class, 'show'])->name('invoices.show');
     Route::post('/invoices/{id}/pay', [BillingController::class, 'recordPayment'])->name('invoices.pay');
-
     Route::resource('patients', PatientController::class);
 });
 
-
-// Admin only - User Management
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::resource('users', UserController::class);
-    Route::get('audit-logs', [AuditLogController::class, 'index'])->name('audit.index');
-});
 
 // Admin & Authorized Staff Only - User Management & Pharmacy
 Route::middleware(['auth', 'role:admin'])->group(function () {

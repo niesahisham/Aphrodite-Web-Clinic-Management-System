@@ -26,6 +26,15 @@ class PrescriptionController extends Controller
         $patients = Patient::where('status', 'Active')->orderBy('full_name')->get();
         $drugs = Drug::orderBy('name')->get();
         return view('prescriptions.create', compact('patients', 'drugs'));
+
+        PrescriptionItem::create([
+        'prescription_id' => $prescription->id,
+        'drug_id'         => $request->drug_id,
+        'dosage'          => $request->dosage_instructions,
+        'frequency'       => 'as prescribed',
+        'duration_days'   => 7, // parse from $request->duration if needed
+        'instructions'    => $request->dosage_instructions,
+        ]);
     }
 
     /**
@@ -33,15 +42,28 @@ class PrescriptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'patient_id' => 'required|exists:patients,id',
+            'drug_id'    => 'required|exists:drugs,id',
+            'dosage_instructions' => 'required|string|max:255',
+            'duration'   => 'required|string|max:100',
+        ]);
     }
-
+    
     /**
      * Display the specified resource.
      */
     public function show(Prescription $prescription)
     {
-        //
+        // Create prescription + prescription item:
+        $prescription = Prescription::create([
+            'patient_id'  => $request->patient_id,
+            'doctor_id'   => Auth::id(),
+            'status'      => 'active',
+            'issued_at'   => now(),
+        ]);
+
+        return redirect()->route('prescriptions.index')->with('success', 'Prescription issued successfully!');
     }
 
     /**
