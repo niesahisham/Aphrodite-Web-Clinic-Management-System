@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Prescription;
 use Illuminate\Http\Request;
+use App\Models\Patient;
+use App\Models\Drug;
 
 class PrescriptionController extends Controller
 {
@@ -12,7 +14,8 @@ class PrescriptionController extends Controller
      */
     public function index()
     {
-        //
+        $prescriptions = Prescription::with(['patient', 'drug', 'doctor'])->latest()->get();
+            return view('prescriptions.index', compact('prescriptions'));
     }
 
     /**
@@ -20,7 +23,9 @@ class PrescriptionController extends Controller
      */
     public function create()
     {
-        //
+        $patients = Patient::where('status', 'Active')->orderBy('full_name')->get();
+        $drugs = Drug::orderBy('name')->get();
+        return view('prescriptions.create', compact('patients', 'drugs'));
     }
 
     /**

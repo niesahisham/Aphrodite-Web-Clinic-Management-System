@@ -1,47 +1,31 @@
+{{-- resources/views/dashboard/index.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid px-4 py-3">
-    <h4 class="mb-4">Invoices</h4>
-
-    <div class="card">
-        <div class="card-body p-0">
-            <table class="table table-hover mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th>Invoice No.</th><th>Patient</th>
-                        <th>Amount (RM)</th><th>Status</th>
-                        <th>Date</th><th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                @forelse($invoices as $inv)
-                    <tr>
-                        <td>INV-{{ str_pad($inv->id, 4, '0', STR_PAD_LEFT) }}</td>
-                        <td>{{ $inv->patient->full_name ?? '—' }}</td>
-                        <td>{{ number_format($inv->total_amount, 2) }}</td>
-                        <td>
-                            @if($inv->status == 'paid')
-                                <span class="badge bg-success">Paid</span>
-                            @elseif($inv->status == 'partial')
-                                <span class="badge bg-warning text-dark">Partial</span>
-                            @else
-                                <span class="badge bg-danger">Unpaid</span>
-                            @endif
-                        </td>
-                        <td>{{ $inv->created_at->format('d M Y') }}</td>
-                        <td>
-                            <a href="{{ route('invoices.show', $inv->id) }}"
-                               class="btn btn-sm btn-outline-primary">View</a>
-                        </td>
-                    </tr>
-                @empty
-                    <tr><td colspan="6" class="text-center text-muted py-4">No invoices yet.</td></tr>
-                @endforelse
-                </tbody>
-            </table>
-        </div>
+<div class="grid grid-cols-3 gap-4 mb-6">
+    <div class="bg-white rounded-xl shadow p-5 text-center">
+        <p class="text-gray-500 text-sm">Total Patients</p>
+        <h3 class="text-3xl font-bold text-gray-800">{{ $totalPatients }}</h3>
     </div>
-    <div class="mt-3">{{ $invoices->links() }}</div>
+    <div class="bg-white rounded-xl shadow p-5 text-center">
+        <p class="text-gray-500 text-sm">Today's Appointments</p>
+        <h3 class="text-3xl font-bold text-gray-800">{{ $todayAppointments }}</h3>
+    </div>
+    <div class="bg-white rounded-xl shadow p-5 text-center">
+        <p class="text-gray-500 text-sm">Unpaid Invoices</p>
+        <h3 class="text-3xl font-bold text-red-600">{{ $unpaidInvoices }}</h3>
+    </div>
+</div>
+
+<div class="bg-white rounded-xl shadow p-6">
+    <h6 class="text-sm font-semibold text-gray-700 mb-4">Recent Activity</h6>
+    @forelse($recentActivity as $log)
+        <div class="flex justify-between text-sm border-b border-gray-100 py-2">
+            <span class="text-gray-700">{{ $log->description }}</span>
+            <span class="text-gray-400">{{ $log->created_at->diffForHumans() }}</span>
+        </div>
+    @empty
+        <p class="text-gray-400 text-sm">No activity yet.</p>
+    @endforelse
 </div>
 @endsection

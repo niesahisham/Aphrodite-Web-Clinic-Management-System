@@ -1,71 +1,31 @@
+{{-- resources/views/dashboard/index.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid px-4 py-3">
-    <div class="d-flex align-items-center gap-3 mb-4">
-        <h4 class="mb-0">INV-{{ str_pad($invoice->id, 4, '0', STR_PAD_LEFT) }}</h4>
-        @if($invoice->payment_status == 'paid')
-            <span class="badge bg-success">Paid</span>
-        @elseif($invoice->payment_status == 'partial')
-            <span class="badge bg-warning text-dark">Partial</span>
-        @else
-            <span class="badge bg-danger">Unpaid</span>
-        @endif
+<div class="grid grid-cols-3 gap-4 mb-6">
+    <div class="bg-white rounded-xl shadow p-5 text-center">
+        <p class="text-gray-500 text-sm">Total Patients</p>
+        <h3 class="text-3xl font-bold text-gray-800">{{ $totalPatients }}</h3>
     </div>
-
-    <p class="text-muted">
-        Patient: <strong>{{ $invoice->patient->full_name }}</strong> &nbsp;·&nbsp;
-        Total: <strong>RM {{ number_format($invoice->total_amount, 2) }}</strong>
-    </p>
-
-    <div class="row g-3">
-        <div class="col-md-7">
-            <div class="card p-3">
-                <h6 class="mb-3">Payment History</h6>
-                <table class="table table-sm">
-                    <thead><tr><th>Amount</th><th>Method</th><th>Date</th></tr></thead>
-                    <tbody>
-                    @forelse($invoice->payments as $payment)
-                        <tr>
-                            <td>RM {{ number_format($payment->amount_paid, 2) }}</td>
-                            <td>{{ ucfirst($payment->payment_method) }}</td>
-                            <td>{{ $payment->paid_at?->format('d M Y, H:i') }}</td>
-                        </tr>
-                    @empty
-                        <tr><td colspan="3" class="text-muted">No payments recorded.</td></tr>
-                    @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        @if($invoice->status !== 'paid')
-        <div class="col-md-5">
-            <div class="card p-3">
-                <h6 class="mb-3">Record a Payment</h6>
-                @if(session('success'))
-                    <div class="alert alert-success py-2">{{ session('success') }}</div>
-                @endif
-                <form method="POST" action="{{ route('invoices.pay', $invoice->id) }}">
-                    @csrf
-                    <div class="mb-2">
-                        <label class="form-label small">Amount (RM)</label>
-                        <input type="number" step="0.01" name="amount_paid"
-                               class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small">Payment Method</label>
-                        <select name="payment_method" class="form-select">
-                            <option value="cash">Cash</option>
-                            <option value="card">Card</option>
-                            <option value="online">Online Transfer</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Save Payment</button>
-                </form>
-            </div>
-        </div>
-        @endif
+    <div class="bg-white rounded-xl shadow p-5 text-center">
+        <p class="text-gray-500 text-sm">Today's Appointments</p>
+        <h3 class="text-3xl font-bold text-gray-800">{{ $todayAppointments }}</h3>
     </div>
+    <div class="bg-white rounded-xl shadow p-5 text-center">
+        <p class="text-gray-500 text-sm">Unpaid Invoices</p>
+        <h3 class="text-3xl font-bold text-red-600">{{ $unpaidInvoices }}</h3>
+    </div>
+</div>
+
+<div class="bg-white rounded-xl shadow p-6">
+    <h6 class="text-sm font-semibold text-gray-700 mb-4">Recent Activity</h6>
+    @forelse($recentActivity as $log)
+        <div class="flex justify-between text-sm border-b border-gray-100 py-2">
+            <span class="text-gray-700">{{ $log->description }}</span>
+            <span class="text-gray-400">{{ $log->created_at->diffForHumans() }}</span>
+        </div>
+    @empty
+        <p class="text-gray-400 text-sm">No activity yet.</p>
+    @endforelse
 </div>
 @endsection

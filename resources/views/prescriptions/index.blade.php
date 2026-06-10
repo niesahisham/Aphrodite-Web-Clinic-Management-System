@@ -31,8 +31,8 @@
             @forelse($prescriptions as $p)
                 <tr style="border-bottom: 1px solid #e5e7eb;">
                     <td style="padding: 12px;">{{ $p->id }}</td>
-                    <td style="padding: 12px;">{{ $p->patient->name }}</td>
-                    <td style="padding: 12px; font-weight: bold;">{{ $p->drug->name }}</td>
+                    <td style="padding: 12px;">{{ $p->patient->full_name }}</td>
+                    <td style="padding: 12px; font-weight: bold;">{{ $p->drug->full_name }}</td>
                     <td style="padding: 12px;">{{ $p->dosage_instructions }}</td>
                     <td style="padding: 12px;">{{ $p->duration }}</td>
                 </tr>

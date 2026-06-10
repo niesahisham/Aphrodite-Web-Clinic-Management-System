@@ -11,7 +11,7 @@ class PatientController extends Controller
     // Show all patients
     public function index(Request $request)
     {
-        $search = $request->query('search');
+        $search = $request->query('search', '');
 
         $patients = Patient::when($search, function ($query, $search) {
             $query->where('full_name', 'like', "%{$search}%")
@@ -98,7 +98,14 @@ class PatientController extends Controller
     // Delete patient
     public function destroy(Patient $patient)
     {
+        if (Auth::user()->role === 'admin') {
+            abort(403, 'Admins cannot delete patients.');
+        }
+        // or restrict to specific roles:
+        if (!in_array(Auth::user()->role, ['doctor', 'nurse'])) {
+            abort(403, 'Unauthorized.');
+        }
         $patient->delete();
         return redirect()->route('patients.index')->with('success', 'Patient deleted successfully!');
-    }
+    }   
 }

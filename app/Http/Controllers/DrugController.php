@@ -34,7 +34,7 @@ class DrugController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'form' => 'required',
+            'dosage_form' => 'required',
             'dosage' => 'required',
             'strength' => 'required',
         ]);
@@ -67,7 +67,7 @@ class DrugController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'form' => 'required|string',
+            'dosage_form' => 'required|string',
             'dosage' => 'required|string',
             'strength' => 'required|string',
         ]);

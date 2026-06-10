@@ -9,7 +9,7 @@ use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\QueueController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\BillingController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,9 +37,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('users', UserController::class);
     Route::get('audit-logs', [AuditLogController::class, 'index'])->name('audit.index');
     
-    // Secured Pharmacy Modules
-    Route::resource('drugs', DrugController::class);
+});
+
+// Prescriptions — accessible by admin, doctor, nurse
+Route::middleware(['auth', 'role:admin,doctor,nurse'])->group(function () {
     Route::resource('prescriptions', PrescriptionController::class);
+});
+
+// Drugs — accessible by admin and doctor
+Route::middleware(['auth', 'role:admin,doctor'])->group(function () {
+    Route::resource('drugs', DrugController::class);
 });
 
 // Appointment & Queue module

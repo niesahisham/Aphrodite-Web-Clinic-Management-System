@@ -97,6 +97,11 @@ class UserController extends Controller
     // Delete user
     public function destroy(string $id)
     {
+        if (auth()->id() == $id) {
+            return redirect()->route('users.index')
+                ->with('error', 'You cannot delete your own account.');
+        }
+        
         $user = User::findOrFail($id);
 
         // Log the action before deleting

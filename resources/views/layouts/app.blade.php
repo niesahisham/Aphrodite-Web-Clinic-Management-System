@@ -51,16 +51,6 @@
                     </a>
 
                     {{-- Appointments - all roles --}}
-                    <a href="#"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium
-                        {{ request()->routeIs('appointments.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        Appointments
-                    </a>
-
-                    {{-- Appointments - all roles --}}
                     <a href="{{ route('appointments.index') }}"
                         class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium
                         {{ request()->routeIs('appointments.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}">
@@ -94,7 +84,7 @@
 
                     {{-- Billing & Payments - admin and receptionist only --}}
                     @if(in_array(Auth::user()->role, ['admin', 'receptionist']))
-                    <a href="#"
+                    <a href="{{ route('invoices.index') }}"
                         class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium
                         {{ request()->routeIs('invoices.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
