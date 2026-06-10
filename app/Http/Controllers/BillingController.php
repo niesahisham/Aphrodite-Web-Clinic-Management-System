@@ -35,7 +35,8 @@ class BillingController extends Controller
         'patient_id'     => $patientId,
         'total_amount'   => $amount,
         'payment_status' => 'unpaid',
-        'handled_by'     => auth()->id(), 
+        'handled_by'     => auth()->id(),
+        'issued_at' => now(), 
     ]);
 }
 
