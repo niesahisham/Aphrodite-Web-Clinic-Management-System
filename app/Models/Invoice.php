@@ -32,4 +32,9 @@ class Invoice extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function handledBy()
+    {
+        return $this->belongsTo(User::class, 'handled_by');
+    }
 }

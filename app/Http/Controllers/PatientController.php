@@ -41,9 +41,10 @@ class PatientController extends Controller
         ]);
 
         // Auto-generate patient code
-        $count = Patient::count() + 1;
-        $patientCode = 'P' . str_pad($count, 3, '0', STR_PAD_LEFT);
-
+        $lastPatient = Patient::orderBy('id', 'desc')->first();
+        $nextNumber = $lastPatient ? ((int) substr($lastPatient->patient_code, 1)) + 1 : 1;
+        $patientCode = 'P' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+        
         Patient::create([
             'patient_code' => $patientCode,
             'full_name'    => $request->full_name,
@@ -98,12 +99,13 @@ class PatientController extends Controller
     // Delete patient
     public function destroy(Patient $patient)
     {
-        // Only doctors and nurses can delete; admins cannot
-        if (!in_array(Auth::user()->role, ['doctor', 'nurse'])) {
-            abort(403, 'Unauthorized. Only doctors and nurses can delete patients.');
+        // Admin, doctor, nurse, receptionist can all manage patients per README
+        // But delete should be restricted — admin should be able to delete too
+        if (Auth::user()->role === 'receptionist') {
+            abort(403, 'Receptionists cannot delete patients.');
         }
-        
+
         $patient->delete();
         return redirect()->route('patients.index')->with('success', 'Patient deleted successfully!');
-    }  
+    } 
 }

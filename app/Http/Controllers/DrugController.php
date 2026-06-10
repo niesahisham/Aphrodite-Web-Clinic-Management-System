@@ -33,13 +33,16 @@ class DrugController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'dosage_form' => 'required',
-            'dosage' => 'required',
-            'strength' => 'required',
+            'name'        => 'required|string|max:255',
+            'dosage_form' => 'required|string|max:100',
+            'strength'    => 'required|string|max:100',
+            'category'    => 'nullable|string|max:100',
+            'unit_price'  => 'nullable|numeric|min:0',
         ]);
 
-        Drug::create($request->all());
+        Drug::create($request->only([
+            'name', 'dosage_form', 'strength', 'category', 'unit_price', 'contraindications'
+        ]));
 
         return redirect()->route('drugs.index')->with('success', 'Drug added successfully!');
     }

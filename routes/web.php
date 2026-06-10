@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('queue/{appointment}/call', [QueueController::class, 'call'])->name('queue.call');
     Route::patch('queue/{appointment}/complete', [QueueController::class, 'complete'])->name('queue.complete');
     Route::patch('queue/{appointment}/cancel', [QueueController::class, 'cancel'])->name('queue.cancel');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('queue-display', [QueueController::class, 'display'])->name('queue.display');
     Route::get('queue-display/data', [QueueController::class, 'boardData'])->name('queue.board-data');
 });
