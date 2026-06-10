@@ -20,11 +20,6 @@
             <input type="text" name="dosage_form" placeholder="e.g., Tablet, Capsule, Syrup" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
         </div>
 
-        <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Dosage:</label>
-            <input type="text" name="dosage" placeholder="e.g., 500mg, 10ml" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-        </div>
-
         <div style="margin-bottom: 20px;">
             <label style="display: block; margin-bottom: 5px; font-weight: bold;">Strength:</label>
             <input type="text" name="strength" placeholder="e.g., Regular, Extra Strength" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">

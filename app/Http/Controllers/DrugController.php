@@ -38,6 +38,7 @@ class DrugController extends Controller
             'strength'    => 'required|string|max:100',
             'category'    => 'nullable|string|max:100',
             'unit_price'  => 'nullable|numeric|min:0',
+            'contraindications' => 'nullable|string',
         ]);
 
         Drug::create($request->only([
@@ -69,12 +70,17 @@ class DrugController extends Controller
     public function update(Request $request, Drug $drug)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name'        => 'required|string|max:255',
             'dosage_form' => 'required|string|max:100',
-            'strength' => 'required|string|max:100',
+            'strength'    => 'required|string|max:100',
+            'category'    => 'nullable|string|max:100',
+            'unit_price'  => 'nullable|numeric|min:0',
         ]);
 
-        $drug->update($request->all());
+        // Use specific fields instead of $request->all() for safety
+        $drug->update($request->only([
+            'name', 'dosage_form', 'strength', 'category', 'unit_price', 'contraindications'
+        ]));
 
         return redirect()->route('drugs.index')->with('success', 'Drug updated successfully!');
     }
