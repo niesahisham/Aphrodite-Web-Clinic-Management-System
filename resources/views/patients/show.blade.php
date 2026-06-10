@@ -64,11 +64,18 @@
             class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 text-sm font-medium">
             Back
         </a>
+
+        <a href="{{ route('medical-records.patient', $patient) }}"
+            class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 text-sm font-medium">
+            View Medical Records
+        </a>
+
         @if(Auth::user()->role !== 'admin')
         <a href="{{ route('patients.edit', $patient) }}"
             class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600 text-sm font-medium">
             Edit Patient
         </a>
+        
         <form action="{{ route('patients.destroy', $patient) }}" method="POST"
             onsubmit="return confirm('Delete this patient?')">
             @csrf

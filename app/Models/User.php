@@ -59,4 +59,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Appointment::class, 'booked_by');
     }
+
+    // User has many medical records as doctor
+    public function medicalRecords()
+    {
+        return $this->hasMany(MedicalRecord::class, 'doctor_id');
+    }
 }

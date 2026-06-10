@@ -8,6 +8,7 @@ use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\QueueController;
+use App\Http\Controllers\MedicalRecordController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -58,6 +59,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('queue/{appointment}/cancel', [QueueController::class, 'cancel'])->name('queue.cancel');
     Route::get('queue-display', [QueueController::class, 'display'])->name('queue.display');
     Route::get('queue-display/data', [QueueController::class, 'boardData'])->name('queue.board-data');
+});
+
+// Electronic Medical Records
+Route::middleware('auth')->group(function () { 
+    Route::get('patients/{patient}/medical-records', [MedicalRecordController::class, 'patientRecords'])->name('medical-records.patient');
+    Route::resource('medical-records', MedicalRecordController::class);
 });
 
 require __DIR__.'/auth.php';
