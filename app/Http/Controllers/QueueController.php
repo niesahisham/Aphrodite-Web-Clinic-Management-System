@@ -72,7 +72,7 @@ class QueueController extends Controller
             app(BillingController::class)->generateInvoice(
                 $appointment->id,
                 $appointment->patient_id,
-                100.00 // default or configurable amount
+                100.00 // TODO: replace with calculated amount from prescription items
             );
         }
 

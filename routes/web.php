@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -58,7 +59,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('queue/{appointment}/call', [QueueController::class, 'call'])->name('queue.call');
     Route::patch('queue/{appointment}/complete', [QueueController::class, 'complete'])->name('queue.complete');
     Route::patch('queue/{appointment}/cancel', [QueueController::class, 'cancel'])->name('queue.cancel');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('queue-display', [QueueController::class, 'display'])->name('queue.display');
     Route::get('queue-display/data', [QueueController::class, 'boardData'])->name('queue.board-data');
 });
