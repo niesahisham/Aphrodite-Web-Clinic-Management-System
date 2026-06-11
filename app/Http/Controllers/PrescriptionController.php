@@ -78,7 +78,9 @@ class PrescriptionController extends Controller
      */
     public function show(Prescription $prescription)
     {
-        //
+        $prescription->load(['patient', 'items.drug']);
+
+    return view('prescriptions.show', compact('prescription'));
     }
 
     /**
@@ -86,7 +88,9 @@ class PrescriptionController extends Controller
      */
     public function edit(Prescription $prescription)
     {
-        //
+        $prescription->load('patient');
+
+    return view('prescriptions.edit', compact('prescription'));
     }
 
     /**
