@@ -11,20 +11,70 @@
 | Niesa Batrisyia Binti Nor Hisham         | 2419714   | Appointment & Queue             |
 | Nurin Sofina Binti Yusdi                 | 2221372   | Patient Management              |
 | Nurul Aida Fatini Binti Mohd Rosli       | 2410416   | Authentication & Security       |
-| Nur Adawiyah Binti Zakaria               | 2417438   |  Prescriptions & Medications    |
+| Nur Adawiyah Binti Zakaria               | 2417438   | Prescriptions & Medications    |
 
 ---
 
 ## 🚀 Project Description
 The clinic management system is a web-based solution to improve the efficiency and organisation of daily healthcare operations. The system helps healthcare institutions manage patient records, appointments, prescriptions, medication inventory, and billing through a more centralised digital platform. It also provides role-based access for administrators, doctors, nurses, and receptionists to ensure secure and efficient system management. This web application adheres to Shariah principles such as transparency and justice by ensuring accurate medical data.
 
-## Project's Features
+## Project's Features and Functionalities
 1. Dashboard Overview
+   Features
+   -Displays total patients, today's appointments, and unpaid invoices.
+   -Shows recent system activities and updates.
+   -Provides a quick overview of clinic operations.
+    Usage
+   -Users view clinic statistics and recent activities immediately after logging in.
 2. User Roles & Security (Can only be accessed by Admins)
+   Features
+   -User account creation, update, and deletion.
+   -Role assignment (Admin, Doctor, Nurse, Receptionist).
+   -Role-Based Access Control.
+   -Audit logging for user activities.
+   Usage
+   -Administrators manage user accounts and assign permissions.
+   -The system restricts access according to each user's role.
 3. Patient Management
+   Features
+   -Patient registration with unique patient IDs.
+   -Patient profile management.
+   -Allergy tracking and alerts.
+   -Medical record history access.
+   -Search and filtering functions.
+   Usage
+   -Staff register new patients and update patient information.
+   -Healthcare providers review patient history and allergy information before treatment.
 4. Appointment & Scheduling
+   Features
+   -Appointment booking and management.
+   -Doctor availability checking.
+   -Daily and weekly calendar views.
+   -Queue management system.
+   -Appointment status tracking.
+   Usage
+   -Receptionists schedule appointments.
+   -Staff manage patient queues and monitor appointment progress.
 5. Prescriptions & Medication
+   Features
+   -Medication inventory management.
+   -Prescription creation and management.
+   -Allergy safety validation.
+   -Prescription history tracking.
+   -Prescription status monitoring.
+   Usage
+   -Doctors prescribe medications for patients.
+   -Healthcare providers monitor and update prescription statuses.
 6. Billing & Payments (Can only be accessed by Admins and Receptionists)
+   Features
+   -Invoice generation.
+   -Payment recording and tracking.
+   -Partial and full payment support.
+   -Payment history management.
+   -Automatic payment status updates.
+   Usage
+   -Authorized staff generate invoices after consultations.
+   -Payments are recorded and outstanding balances are monitored.
 
 ## Technologies Used
 - **Framework:** Laravel 12
