@@ -14,18 +14,55 @@ class DrugSeeder extends Seeder
     public function run(): void
     {
         $drugs = [
-            ['name' => 'Paracetamol', 'description' => '500mg - For pain relief and fever reduction.'],
-            ['name' => 'Amoxicillin', 'description' => '250mg - Antibiotic for bacterial infections.'],
-            ['name' => 'Ibuprofen', 'description' => '400mg - Anti-inflammatory painkiller.'],
-            ['name' => 'Cetirizine', 'description' => '10mg - Antihistamine for allergy relief.'],
-            ['name' => 'Metformin', 'description' => '500mg - For blood sugar management.'],
+            [
+                'name' => 'Paracetamol',
+                'category' => 'Analgesic',
+                'dosage_form' => 'Tablet',
+                'strength' => '500mg',
+                'unit_price' => '0.50'
+            ],
+            [
+                'name' => 'Amoxicillin',
+                'category' => 'Antibiotic',
+                'dosage_form' => 'Capsule',
+                'strength' => '250mg',
+                'unit_price' => '1.20'
+            ],
+            [
+                'name' => 'Ibuprofen',
+                'category' => 'NSAID',
+                'dosage_form' => 'Tablet',
+                'strength' => '400mg',
+                'unit_price' => '0.80'
+            ],
+            [
+                'name' => 'Cetirizine',
+                'category' => 'Antihistamine',
+                'dosage_form' => 'Tablet',
+                'strength' => '10mg',
+                'unit_price' => '0.60'
+            ],
+            [
+                'name' => 'Metformin',
+                'category' => 'Antidiabetic',
+                'dosage_form' => 'Tablet',
+                'strength' => '500mg',
+                'unit_price' => '1.50'
+            ]
         ];
 
         foreach ($drugs as $drug) {
-            // updateOrCreate prevents duplicate entry crashes if run twice
+            // Uniquely identify the record using name + strength to prevent database crashes
             Drug::updateOrCreate(
-                ['name' => $drug['name']], 
-                ['description' => $drug['description']]
+                [
+                    'name' => $drug['name'], 
+                    'strength' => $drug['strength']
+                ], 
+                [
+                    'category' => $drug['category'],
+                    'dosage_form' => $drug['dosage_form'],
+                    'unit_price' => $drug['unit_price']
+                ]
             );
         }
     }
