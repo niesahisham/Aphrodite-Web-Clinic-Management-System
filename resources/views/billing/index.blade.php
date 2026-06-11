@@ -21,12 +21,6 @@
 @endif
 
 
-@if(session('success'))
-<div class="bg-green-100 text-green-700 px-4 py-3 rounded-lg mb-4 text-sm">
-    {{ session('success') }}
-</div>
-@endif
-
 <div class="bg-white rounded-xl shadow overflow-hidden">
     <table class="w-full text-sm text-left">
         <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
