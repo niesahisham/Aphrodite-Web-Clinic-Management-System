@@ -66,6 +66,7 @@ class PrescriptionController extends Controller
         $prescription->items()->create([
             'drug_id'  => $request->drug_id,
             'dosage'   => $request->dosage_instructions, 
+            'frequency' => 'As directed',
             'duration' => $request->duration,
         ]);
 
