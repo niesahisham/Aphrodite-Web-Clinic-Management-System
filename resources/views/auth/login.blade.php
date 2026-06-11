@@ -21,13 +21,6 @@
             <p class="text-gray-500 text-sm mt-1">Hospital Management Platform</p>
         </div>
 
-        <!-- Session Status -->
-        @if(session('status'))
-            <div class="bg-green-100 text-green-700 p-3 rounded mb-4 text-sm">
-                {{ session('status') }}
-            </div>
-        @endif
-
         <!-- Error Messages -->
         @if($errors->any())
             <div class="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm">
@@ -38,13 +31,13 @@
         @endif
 
         <!-- Form -->
-        <form method="POST" action="{{ route('login') }}">
+        <form id="login-form" method="POST" action="{{ route('login') }}">
             @csrf
 
             <!-- Email -->
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-medium mb-1">Email</label>
-                <input type="email" name="email" value="{{ old('email') }}"
+                <input id="email" type="email" name="email" value="{{ old('email') }}"
                     placeholder="Enter your email"
                     class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required autofocus>
@@ -53,7 +46,7 @@
             <!-- Password -->
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-medium mb-1">Password</label>
-                <input type="password" name="password"
+                <input id="password" type="password" name="password"
                     placeholder="Enter password"
                     class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required>
@@ -76,13 +69,25 @@
 
         <!-- Role Buttons -->
         <div class="grid grid-cols-2 gap-3">
-            <a href="#" class="border border-gray-300 rounded-lg py-2 text-center text-sm font-medium text-gray-700 hover:bg-gray-50">Admin</a>
-            <a href="#" class="border border-gray-300 rounded-lg py-2 text-center text-sm font-medium text-gray-700 hover:bg-gray-50">Doctor</a>
-            <a href="#" class="border border-gray-300 rounded-lg py-2 text-center text-sm font-medium text-gray-700 hover:bg-gray-50">Nurse</a>
-            <a href="#" class="border border-gray-300 rounded-lg py-2 text-center text-sm font-medium text-gray-700 hover:bg-gray-50">Receptionist</a>
+            <button type="button" onclick="quickLogin('admin@test.com')"
+                class="border border-gray-300 rounded-lg py-2 text-center text-sm font-medium text-gray-700 hover:bg-gray-50">Admin</button>
+            <button type="button" onclick="quickLogin('doctor@test.com')"
+                class="border border-gray-300 rounded-lg py-2 text-center text-sm font-medium text-gray-700 hover:bg-gray-50">Doctor</button>
+            <button type="button" onclick="quickLogin('nurse@test.com')"
+                class="border border-gray-300 rounded-lg py-2 text-center text-sm font-medium text-gray-700 hover:bg-gray-50">Nurse</button>
+            <button type="button" onclick="quickLogin('receptionist@test.com')"
+                class="border border-gray-300 rounded-lg py-2 text-center text-sm font-medium text-gray-700 hover:bg-gray-50">Receptionist</button>
         </div>
 
     </div>
+
+    <script>
+    function quickLogin(email) {
+        document.getElementById('email').value = email;
+        document.getElementById('password').value = 'password123';
+        document.getElementById('login-form').submit();
+    }
+    </script>
 
 </body>
 </html>
