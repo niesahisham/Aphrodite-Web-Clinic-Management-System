@@ -28,8 +28,6 @@ The clinic management system is a web-based solution to improve the efficiency a
 * **Usage:**
   * Users can view critical clinic statistics and recent activities immediately upon logging into the system.
 
----
-
 ### User Roles & Security *(Admin Only)*
 * **Features:**
   * Complete user account lifecycle management (Create, Read, Update, Delete).
@@ -39,8 +37,6 @@ The clinic management system is a web-based solution to improve the efficiency a
 * **Usage:**
   * System Administrators manage staff accounts and securely assign or revoke system permissions.
   * The application automatically restricts dashboard views according to each logged-in user's role.
-
----
 
 ### Patient Management
 * **Features:**
@@ -52,8 +48,6 @@ The clinic management system is a web-based solution to improve the efficiency a
   * Clinic staff register new patients and keep demographic information up to date.
   * Healthcare providers review historical data and critical allergy warnings before diagnostic treatment.
 
----
-
 ### Appointment & Scheduling
 * **Features:**
   * Streamlined appointment booking, modification, and scheduling management.
@@ -64,8 +58,6 @@ The clinic management system is a web-based solution to improve the efficiency a
   * Receptionists schedule upcoming visits and walk-ins.
   * Front-desk staff manage active patient queues and monitor checkout progress fluidly.
 
----
-
 ### Prescriptions & Medication
 * **Features:**
   * Medication inventory management.
@@ -74,8 +66,6 @@ The clinic management system is a web-based solution to improve the efficiency a
 * **Usage:**
   * Doctors quickly prescribe medications and outline flexible text-based durations (e.g., *"3 to 5 days"*).
   * Medical providers monitor and update medicine disbursement logs on the fly.
-
----
 
 ### Billing & Payments *(Admin & Receptionist Only)*
 * **Features:**
