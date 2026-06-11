@@ -19,36 +19,61 @@
 
     <table style="width: 100%; border-collapse: collapse; text-align: left;">
         <thead>
-            <tr style="background: #f3f4f6; border-bottom: 2px solid #e5e7eb;">
-                <th style="padding: 12px;">ID</th>
-                <th style="padding: 12px;">Patient Name</th>
-                <th style="padding: 12px;">Medication</th>
-                <th style="padding: 12px;">Instructions</th>
-                <th style="padding: 12px;">Duration</th>
+            <tr style="background:#f3f4f6;border-bottom:2px solid #e5e7eb;">
+                <th style="padding:12px;">ID</th>
+                <th style="padding:12px;">Patient Name</th>
+                <th style="padding:12px;">Medication</th>
+                <th style="padding:12px;">Instructions</th>
+                <th style="padding:12px;">Duration</th>
+                <th style="padding:12px;">Status</th>
+                <th style="padding:12px;">Issued Date</th>
+                <th style="padding:12px;">Actions</th>
             </tr>
         </thead>
         <tbody>
             @forelse($prescriptions as $p)
                 <tr style="border-bottom: 1px solid #e5e7eb;">
-                <td style="padding: 12px;">{{ $p->id }}</td>
-                <td style="padding: 12px;">{{ $p->patient->full_name }}</td>
-                <td style="padding: 12px; font-weight: bold;">
-                    {{-- Prescriptions link to items, not directly to a drug --}}
-                    {{ $p->items->count() }} medication(s)
-                </td>
-                
-                <td style="padding: 12px;">
-                <span class="px-2 py-1 rounded text-xs
-                    {{ $p->status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600' }}">
-                    {{ ucfirst($p->status) }}
-                </span>
-                </td>
-        
-                <td style="padding: 12px;">{{ \Carbon\Carbon::parse($p->issued_at)->format('d M Y') }}</td>
+                    <td style="padding: 12px;">{{ $p->id }}</td>
+                    
+                    <td style="padding: 12px;">{{ $p->patient->name ?? 'N/A' }}</td>
+                    
+                    <td style="padding: 12px; font-weight: bold;">
+                        @foreach($p->items as $item)
+                            <div>{{ $item->drug->name ?? 'Unknown Drug' }}</div>
+                        @endforeach
+                    </td>
+
+                    <td style="padding: 12px;">
+                        @foreach($p->items as $item)
+                            <div>{{ $item->dosage }} <span style="color: #6b7280; font-size: 0.85em;">({{ $item->frequency }})</span></div>
+                        @endforeach
+                    </td>
+
+                    <td style="padding: 12px;">
+                        @foreach($p->items as $item)
+                            <div>{{ $item->duration_days }}</div>
+                        @endforeach
+                    </td>
+                    
+                    <td style="padding: 12px;">
+                        <span style="padding: 4px 8px; border-radius: 4px; font-size: 12px;" 
+                              class="{{ $p->status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600' }}">
+                            {{ ucfirst($p->status) }}
+                        </span>
+                    </td>
+            
+                    <td style="padding: 12px;">{{ \Carbon\Carbon::parse($p->issued_at)->format('d M Y') }}</td>
+
+                    <td style="padding:12px;">
+                        <a href="{{ route('prescriptions.show', $p) }}" style="color:#2563eb;text-decoration:underline;">View</a>
+                        @if(Auth::user() && Auth::user()->role !== 'admin')
+                            | <a href="{{ route('prescriptions.edit', $p) }}" style="color:#d97706;text-decoration:underline;">Edit</a>
+                        @endif
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5" style="padding: 12px; text-align: center; color: #6b7280;">No prescriptions issued yet.</td>
+                    <td colspan="8" style="padding: 12px; text-align: center; color: #6b7280;">No prescriptions issued yet.</td>
                 </tr>
             @endforelse
         </tbody>
