@@ -86,6 +86,7 @@ The clinic management system is a web-based solution to improve the efficiency a
 ## Screenshots
 
 ## ERD
+<img width="1048" height="2171" alt="ERDWEBPROJECT drawio" src="https://github.com/user-attachments/assets/461cbab0-4cc6-43f4-b4e5-aedee6576029" />
 
 
 
