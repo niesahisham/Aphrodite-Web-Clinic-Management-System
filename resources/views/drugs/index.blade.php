@@ -24,8 +24,8 @@
             <tr>
                 <th class="px-6 py-3">Name</th>
                 <th class="px-6 py-3">Form</th>
-                <th class="px-6 py-3">Strength</th>
-                <th class="px-6 py-3 text-center">Actions</th>
+                <th class="px-6 py-3">Category</th> <th class="px-6 py-3">Strength</th>
+                <th class="px-6 py-3">Unit Price</th> <th class="px-6 py-3 text-center">Actions</th>
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-100">
@@ -33,8 +33,8 @@
             <tr class="hover:bg-gray-50">
                 <td class="px-6 py-4 font-medium">{{ $drug->name }}</td>
                 <td class="px-6 py-4">{{ $drug->dosage_form }}</td>
-                <td class="px-6 py-4">{{ $drug->strength }}</td>
-                <td class="px-6 py-4 flex justify-center gap-4">
+                <td class="px-6 py-4 text-gray-600">{{ $drug->category }}</td> <td class="px-6 py-4">{{ $drug->strength }}</td>
+                <td class="px-6 py-4 text-gray-600">RM {{ number_format($drug->unit_price, 2) }}</td> <td class="px-6 py-4 flex justify-center gap-4">
                     <a href="{{ route('drugs.edit', $drug->id) }}" 
                        class="text-blue-600 hover:underline">Edit</a>
                     <form action="{{ route('drugs.destroy', $drug->id) }}" method="POST"
@@ -46,8 +46,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="4" class="px-6 py-8 text-center text-gray-400">
-                    No drugs registered yet.
+                <td colspan="6" class="px-6 py-8 text-center text-gray-400"> No drugs registered yet.
                 </td>
             </tr>
             @endforelse
