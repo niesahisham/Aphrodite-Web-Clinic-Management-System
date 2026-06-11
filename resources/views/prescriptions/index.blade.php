@@ -35,7 +35,13 @@
                 <tr style="border-bottom: 1px solid #e5e7eb;">
                     <td style="padding: 12px;">{{ $p->id }}</td>
                     
-                    <td style="padding: 12px;">{{ $p->patient->name ?? 'N/A' }}</td>
+                    <td style="padding: 12px;">
+                        @if($p->patient)
+                            {{ $p->patient->name ?? $p->patient->full_name ?? $p->patient->patient_name ?? ($p->patient->first_name . ' ' . ($p->patient->last_name ?? '')) }}
+                        @else
+                            <span style="color: #9ca3af;">No Patient Assigned</span>
+                        @endif
+                    </td>
                     
                     <td style="padding: 12px; font-weight: bold;">
                         @foreach($p->items as $item)
