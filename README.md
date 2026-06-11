@@ -18,63 +18,74 @@
 ## 🚀 Project Description
 The clinic management system is a web-based solution to improve the efficiency and organisation of daily healthcare operations. The system helps healthcare institutions manage patient records, appointments, prescriptions, medication inventory, and billing through a more centralised digital platform. It also provides role-based access for administrators, doctors, nurses, and receptionists to ensure secure and efficient system management. This web application adheres to Shariah principles such as transparency and justice by ensuring accurate medical data.
 
-## Project's Features and Functionalities
-1. Dashboard Overview
-   Features
-   -Displays total patients, today's appointments, and unpaid invoices.
-   -Shows recent system activities and updates.
-   -Provides a quick overview of clinic operations.
-    Usage
-   -Users view clinic statistics and recent activities immediately after logging in.
-2. User Roles & Security (Can only be accessed by Admins)
-   Features
-   -User account creation, update, and deletion.
-   -Role assignment (Admin, Doctor, Nurse, Receptionist).
-   -Role-Based Access Control.
-   -Audit logging for user activities.
-   Usage
-   -Administrators manage user accounts and assign permissions.
-   -The system restricts access according to each user's role.
-3. Patient Management
-   Features
-   -Patient registration with unique patient IDs.
-   -Patient profile management.
-   -Allergy tracking and alerts.
-   -Medical record history access.
-   -Search and filtering functions.
-   Usage
-   -Staff register new patients and update patient information.
-   -Healthcare providers review patient history and allergy information before treatment.
-4. Appointment & Scheduling
-   Features
-   -Appointment booking and management.
-   -Doctor availability checking.
-   -Daily and weekly calendar views.
-   -Queue management system.
-   -Appointment status tracking.
-   Usage
-   -Receptionists schedule appointments.
-   -Staff manage patient queues and monitor appointment progress.
-5. Prescriptions & Medication
-   Features
-   -Medication inventory management.
-   -Prescription creation and management.
-   -Allergy safety validation.
-   -Prescription history tracking.
-   -Prescription status monitoring.
-   Usage
-   -Doctors prescribe medications for patients.
-   -Healthcare providers monitor and update prescription statuses.
-6. Billing & Payments (Can only be accessed by Admins and Receptionists)
-   Features
-   -Invoice generation.
-   -Payment recording and tracking.
-   -Partial and full payment support.
-   -Payment history management.
-   -Automatic payment status updates.
-   Usage
-   -Authorized staff generate invoices after consultations.
-   -Payments are recorded and outstanding balances are monitored.
+## Project's Features & Functionalities
+
+### Dashboard Overview
+* **Features:**
+  * Displays total patients, today's appointments, and unpaid invoices.
+  * Shows recent system activities and updates.
+  * Provides a quick, real-time overview of clinic operations.
+* **Usage:**
+  * Users can view critical clinic statistics and recent activities immediately upon logging into the system.
+
+---
+
+### User Roles & Security *(Admin Only)*
+* **Features:**
+  * Complete user account lifecycle management (Create, Read, Update, Delete).
+  * Role assignment for four distinct tiers: **Admin, Doctor, Nurse, and Receptionist**.
+  * Strict Role-Based Access Control protecting internal clinic endpoints.
+  * Automated audit logging tracking vital user activities.
+* **Usage:**
+  * System Administrators manage staff accounts and securely assign or revoke system permissions.
+  * The application automatically restricts dashboard views according to each logged-in user's role.
+
+---
+
+### Patient Management
+* **Features:**
+  * Automated patient registration generating unique Patient IDs.
+  * Centralized patient profile management.
+  * Dynamic allergy tracking and automated safety alerts.
+  * Instant access to a patient's historical medical records, previous consultation trails, and search filters.
+* **Usage:**
+  * Clinic staff register new patients and keep demographic information up to date.
+  * Healthcare providers review historical data and critical allergy warnings before diagnostic treatment.
+
+---
+
+### Appointment & Scheduling
+* **Features:**
+  * Streamlined appointment booking, modification, and scheduling management.
+  * Live doctor availability checking to avoid booking overlaps.
+  * Dynamic daily and weekly clinic calendar views.
+  * Real-time waiting room queue management system with appointment status tracking.
+* **Usage:**
+  * Receptionists schedule upcoming visits and walk-ins.
+  * Front-desk staff manage active patient queues and monitor checkout progress fluidly.
+
+---
+
+### Prescriptions & Medication
+* **Features:**
+  * Medication inventory management.
+  * Robust prescription creation tool linking multiple child drug items to a single consultation.
+  * Comprehensive historical prescription logging and real-time status monitoring (*Active, Administered, Completed*).
+* **Usage:**
+  * Doctors quickly prescribe medications and outline flexible text-based durations (e.g., *"3 to 5 days"*).
+  * Medical providers monitor and update medicine disbursement logs on the fly.
+
+---
+
+### Billing & Payments *(Admin & Receptionist Only)*
+* **Features:**
+  * Automated invoice generation combining consultation fees, clinic services, and items from the prescription engine.
+  * Transaction recording with robust tracking mechanics.
+  * Support for both partial payments and full checkout balances.
+  * Ledger history management with automated real-time payment status updates.
+* **Usage:**
+  * Authorized staff instantly generate invoices immediately following a patient's consultation.
+  * Payments are filed securely into the database while outstanding medical balances are monitored.
 
 ## Technologies Used
 - **Framework:** Laravel 12
