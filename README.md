@@ -1,4 +1,4 @@
-# Clinic Management System
+exit# Clinic Management System
 
 **Group:** Aphrodite
 
@@ -11,7 +11,7 @@
 | Niesa Batrisyia Binti Nor Hisham         | 2419714   | Appointment & Queue             |
 | Nurin Sofina Binti Yusdi                 | 2221372   | Patient Management              |
 | Nurul Aida Fatini Binti Mohd Rosli       | 2410416   | Authentication & Security       |
-| Nur Adawiyah Binti Zakaria               | 2417438   | Prescriptions & Medications    |
+| Nur Adawiyah Binti Zakaria               | 2417438   |  Prescriptions & Medications    |
 
 ---
 
