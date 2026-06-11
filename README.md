@@ -91,7 +91,7 @@ The clinic management system is a web-based solution to improve the efficiency a
 | Dashboard          |  ✅  |   ✅   |   ✅ |       ✅     |
 | Patient Management |  ✅  |   ✅   |   ✅ |       ✅     |
 | Appointments       |  ✅  |   ✅   |   ✅ |       ✅     |
-| Prescriptions      |  ✅  |   ✅   |   ❌ |       ❌     |
+| Prescriptions      |  ✅  |   ✅   |   ✅ |       ❌     |
 | Billing & Invoices |  ✅  |   ❌   |   ❌ |       ✅     |
 | User Management    |  ✅  |   ❌   |   ❌ |       ❌     |
 
