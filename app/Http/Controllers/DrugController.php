@@ -37,7 +37,7 @@ class DrugController extends Controller
             'dosage_form' => 'required|string|max:100',
             'strength'    => 'required|string|max:100',
             'category'    => 'required|string|max:100', // 🔥 Changed from nullable to required!
-            'unit_price'  => 'nullable|numeric|min:0',
+            'unit_price'  => 'required|numeric|min:0',
             'contraindications' => 'nullable|string',
         ]);
 
@@ -74,7 +74,7 @@ class DrugController extends Controller
             'dosage_form' => 'required|string|max:100',
             'strength'    => 'required|string|max:100',
             'category'    => 'required|string|max:100',
-            'unit_price'  => 'nullable|numeric|min:0',
+            'unit_price'  => 'required|numeric|min:0',
         ]);
 
         // Use specific fields instead of $request->all() for safety
