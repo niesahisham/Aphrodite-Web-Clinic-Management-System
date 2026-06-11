@@ -14,7 +14,8 @@ class PrescriptionController extends Controller
      */
     public function index()
     {
-        $prescriptions = Prescription::with(['patient', 'drug'])->get();
+        // 🌟 FIXED: Eager load the nested relationship path (patient, items, and item drugs)
+        $prescriptions = Prescription::with(['patient', 'items.drug'])->get();
         return view('prescriptions.index', compact('prescriptions'));
     }
 
@@ -33,28 +34,41 @@ class PrescriptionController extends Controller
      */
     public function store(Request $request)
     {
+        // 1. Validate ALL incoming inputs from the form
         $request->validate([
-            'patient_id' => 'required',
-            'drug_id' => 'required',
+            'patient_id'          => 'required|exists:patients,id',
+            'drug_id'             => 'required|exists:drugs,id',
             'dosage_instructions' => 'required',
-            'duration' => 'required',
+            'duration'            => 'required',
         ]);
 
         $patient = Patient::find($request->patient_id);
         $drug = Drug::find($request->drug_id);
 
         // --- NURIN'S ALLERGY WARNING FLAG SYSTEM ---
-        // Checks if the patient's allergy field contains the prescribed drug name
         if ($patient && $patient->allergies && stripos($patient->allergies, $drug->name) !== false) {
             return redirect()->back()
                 ->withInput()
                 ->with('error', "⚠️ CRITICAL ALERT: Patient is allergic to {$drug->name}! Prescription blocked.");
         }
 
-        Prescription::create($request->all());
+        // 2. Create the Parent Prescription Record 
+        $prescription = Prescription::create([
+            'patient_id'        => $request->patient_id,
+            'doctor_id'         => auth()->id() ?? 1, 
+            'status'            => 'active',
+            'issued_at'         => now(),
+            'medical_record_id' => null, 
+        ]);
+
+        // 3. Create the Child Item using your model's items() relationship!
+        $prescription->items()->create([
+            'drug_id'             => $request->drug_id,
+            'dosage_instructions' => $request->dosage_instructions,
+            'duration'            => $request->duration,
+        ]);
 
         return redirect()->route('prescriptions.index')->with('success', 'Digital prescription generated successfully!');
-    
     }
 
     /**

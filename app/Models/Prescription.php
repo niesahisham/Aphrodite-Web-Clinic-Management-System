@@ -23,10 +23,6 @@ class Prescription extends Model
         return $this->belongsTo(Patient::class);
     }
 
-    public function drug()
-    {
-        return $this->belongsTo(Drug::class);
-    }
 
     public function items()
     {
