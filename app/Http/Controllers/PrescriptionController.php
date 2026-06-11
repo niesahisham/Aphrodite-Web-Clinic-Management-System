@@ -67,7 +67,7 @@ class PrescriptionController extends Controller
             'drug_id'  => $request->drug_id,
             'dosage'   => $request->dosage_instructions, 
             'frequency' => 'As directed',
-            'duration' => $request->duration,
+            'duration_days' => $request->duration,
         ]);
 
         return redirect()->route('prescriptions.index')->with('success', 'Digital prescription generated successfully!');
