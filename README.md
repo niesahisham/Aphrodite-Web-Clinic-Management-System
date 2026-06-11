@@ -57,8 +57,9 @@ The clinic management system is a web-based solution to improve the efficiency a
 ### Steps
 
 1. Clone the repository
-   --bash
-   git clone 
+   ```bash
+   git clone ...
+```
    cd Aphrodite-Web-Clinic-Management-System
 2. Install dependencies 
     --bash
