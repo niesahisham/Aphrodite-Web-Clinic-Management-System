@@ -38,7 +38,7 @@ class PrescriptionController extends Controller
         $request->validate([
             'patient_id'          => 'required|exists:patients,id',
             'drug_id'             => 'required|exists:drugs,id',
-            'dosage_instructions' => 'required',
+            'dosage_instructions' => 'required', // Keeps tracking your blade form field name
             'duration'            => 'required',
         ]);
 
@@ -61,11 +61,12 @@ class PrescriptionController extends Controller
             'medical_record_id' => null, 
         ]);
 
-        // 3. Create the Child Item using your model's items() relationship!
+        // 3. Create the Child Item 
+        // 🌟 FIXED: Changed 'dosage_instructions' key to match your database column 'dosage'
         $prescription->items()->create([
-            'drug_id'             => $request->drug_id,
-            'dosage_instructions' => $request->dosage_instructions,
-            'duration'            => $request->duration,
+            'drug_id'  => $request->drug_id,
+            'dosage'   => $request->dosage_instructions, 
+            'duration' => $request->duration,
         ]);
 
         return redirect()->route('prescriptions.index')->with('success', 'Digital prescription generated successfully!');
