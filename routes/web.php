@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/invoices', [BillingController::class, 'index'])->name('invoices.index');
+    Route::get('/invoices/create', [BillingController::class, 'create'])->name('invoices.create');
+    Route::post('/invoices', [BillingController::class, 'store'])->name('invoices.store');
     Route::get('/invoices/{id}', [BillingController::class, 'show'])->name('invoices.show');
     Route::post('/invoices/{id}/pay', [BillingController::class, 'recordPayment'])->name('invoices.pay');
     Route::resource('patients', PatientController::class);

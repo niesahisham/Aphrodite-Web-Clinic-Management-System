@@ -5,6 +5,22 @@
 
 @section('content')
 
+{{-- Header with Generate Invoice button --}}
+<div class="flex justify-between items-center mb-6">
+    <h2 class="text-lg font-semibold text-gray-800">All Invoices</h2>
+    <a href="{{ route('invoices.create') }}"
+       class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm font-medium">
+        + Generate Invoice
+    </a>
+</div>
+
+@if(session('success'))
+<div class="bg-green-100 text-green-700 px-4 py-3 rounded-lg mb-4 text-sm">
+    {{ session('success') }}
+</div>
+@endif
+
+
 @if(session('success'))
 <div class="bg-green-100 text-green-700 px-4 py-3 rounded-lg mb-4 text-sm">
     {{ session('success') }}
