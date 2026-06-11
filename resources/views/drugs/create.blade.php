@@ -20,6 +20,11 @@
             <input type="text" name="dosage_form" placeholder="e.g., Tablet, Capsule, Syrup" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
         </div>
 
+        <div class="mb-4">
+            <label class="block text-sm font-semibold text-gray-700">Category:</label>
+            <input type="text" name="category" placeholder="e.g., Analgesic, Antibiotic" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+        </div>
+
         <div style="margin-bottom: 20px;">
             <label style="display: block; margin-bottom: 5px; font-weight: bold;">Strength:</label>
             <input type="text" name="strength" placeholder="e.g., Regular, Extra Strength" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">

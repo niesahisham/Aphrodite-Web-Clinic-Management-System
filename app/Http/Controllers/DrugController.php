@@ -36,7 +36,7 @@ class DrugController extends Controller
             'name'        => 'required|string|max:255',
             'dosage_form' => 'required|string|max:100',
             'strength'    => 'required|string|max:100',
-            'category'    => 'nullable|string|max:100',
+            'category'    => 'required|string|max:100', // 🔥 Changed from nullable to required!
             'unit_price'  => 'nullable|numeric|min:0',
             'contraindications' => 'nullable|string',
         ]);
@@ -73,7 +73,7 @@ class DrugController extends Controller
             'name'        => 'required|string|max:255',
             'dosage_form' => 'required|string|max:100',
             'strength'    => 'required|string|max:100',
-            'category'    => 'nullable|string|max:100',
+            'category'    => 'required|string|max:100',
             'unit_price'  => 'nullable|numeric|min:0',
         ]);
 
