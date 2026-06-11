@@ -16,6 +16,12 @@
         </div>
     @endif
 
+    @if(session('warning'))
+    <div style="background:#fef3c7;color:#92400e;padding:12px;margin-bottom:15px;border-radius:5px;border:1px solid #f59e0b;">
+        {{ session('warning') }}
+    </div>
+    @endif
+
     <form action="{{ route('prescriptions.store') }}" method="POST">
         @csrf
         <div style="margin-bottom: 15px;">
@@ -29,7 +35,7 @@
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Select Medication:</label>
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Select Medication (one per prescription)::</label>
             <select name="drug_id" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
                 <option value="">-- Choose Drug --</option>
                 @foreach($drugs as $drug)
