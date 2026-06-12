@@ -4,6 +4,8 @@
 
 **Course:** BIIT 2305 Web Application and Development - Section 02
 
+**Submission Date:** 12th June 2026 (11.59 PM)
+
 ## 👨‍💻 Team Members
 | Name                                     | Matric No | Role                            |
 |------------------------------------------|-----------|---------------------------------|
@@ -187,8 +189,34 @@ The clinic management system is a web-based solution to improve the efficiency a
 ## ERD
 <img width="1048" height="2171" alt="ERDWEBPROJECT drawio" src="https://github.com/user-attachments/assets/461cbab0-4cc6-43f4-b4e5-aedee6576029" />
 
+## Sequence Diagram
+<img width="1344" height="1201" alt="Web_Proposal-Combined Sequence Diagram drawio" src="https://github.com/user-attachments/assets/25c83bb4-af8d-4b33-88ff-3dfe33db94b8" />
 
+## Learning Outcomes
+### Technical Skills Gained
+1. Laravel Framework: Understanding of MVC architecture and Eloquent ORM
+2. Database Design: Creating efficient database schemas and relationships
+3. Authentication: Implementing secure user authentication systems
+4. Frontend Development: Building responsive interfaces with Bootstrap
+5. Version Control: Using Git and GitHub for project management
 
+### Soft Skills Developed
+1. Team Collaboration: Every team member excellently does their part and actively responds
+2. Project Management: Planning, dividing and executing a complex web application
+3. Problem Solving: Debugging and resolving technical challenges
+4. Documentation: Creating comprehensive project documentation
+
+## Challenges Faced
+1. Complex Clinic Management System
+2. Variable Mismatches and Duplicates
+3. Role-based Feature Confusion
+
+## References
+1. Laravel Documentation. (2024). Laravel 10.x Documentation. Retrieved from https://laravel.com/docs/10.x
+2. Bootstrap Documentation. (2024). Bootstrap 5.3 Documentation. Retrieved from https://getbootstrap.com/docs/5.3/
+3. MySQL Documentation. (2024). MySQL 8.0 Reference Manual. Retrieved from https://dev.mysql.com/doc/refman/8.0/en/
+4. MDN Web Docs. (2024). Web Development Resources. Retrieved from https://developer.mozilla.org/
+5. Stack Overflow. (2024). Programming Q&A Platform. Retrieved from https://stackoverflow.com/
 
 
   
