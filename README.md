@@ -178,9 +178,9 @@ The clinic management system is a web-based solution to improve the efficiency a
 <!-- Add screenshot here -->
 
 ### Billing & Payments
-<img width="1280" height="686" alt="image" src="https://github.com/user-attachments/assets/af2684a2-9a33-478e-82e7-8078fa493eae" />
+<img width="1280" height="647" alt="image" src="https://github.com/user-attachments/assets/2980633e-8a05-44d7-acf4-0e528560157d" />
 
-<img width="1280" height="690" alt="image" src="https://github.com/user-attachments/assets/a6cd8019-be44-4c42-9f52-0fd767d5cae0" />
+<img width="1280" height="648" alt="image" src="https://github.com/user-attachments/assets/a46b057d-02e6-4b06-b106-aada53c3aec5" />
 
 
 
