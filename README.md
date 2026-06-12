@@ -161,13 +161,13 @@ The clinic management system is a web-based solution to improve the efficiency a
 > _Screenshots will be added after final demo build is confirmed._
 
 ### Login & Registration
-<!-- Add screenshot here -->
+![Login Page](public/screenshots/login.png)
 
 ### User & Security
-<!-- Add screenshot here -->
+![User & Security](public/screenshots/usersecurity.png)
 
 ### Audit Logs
-<!-- Add screenshot here -->
+![Audit Logs](public/screenshots/auditlog.png)
 
 ### Dashboard Overview
 <!-- Add screenshot here -->
