@@ -158,8 +158,6 @@ The clinic management system is a web-based solution to improve the efficiency a
 
 ## Screenshots
 
-> _Screenshots will be added after final demo build is confirmed._
-
 ### Login & Registration
 ![Login Page](public/screenshots/login.png)
 
@@ -180,7 +178,11 @@ The clinic management system is a web-based solution to improve the efficiency a
 <!-- Add screenshot here -->
 
 ### Billing & Payments
-<!-- Add screenshot here -->
+<img width="1280" height="647" alt="image" src="https://github.com/user-attachments/assets/2980633e-8a05-44d7-acf4-0e528560157d" />
+
+<img width="1280" height="648" alt="image" src="https://github.com/user-attachments/assets/a46b057d-02e6-4b06-b106-aada53c3aec5" />
+
+
 
 ## ERD
 <img width="1048" height="2171" alt="ERDWEBPROJECT drawio" src="https://github.com/user-attachments/assets/461cbab0-4cc6-43f4-b4e5-aedee6576029" />
