@@ -108,33 +108,69 @@ The clinic management system is a web-based solution to improve the efficiency a
 ### Steps
 
 1. Clone the repository
-   --bash
+```bash
    git clone 
    cd Aphrodite-Web-Clinic-Management-System
-2. Install dependencies 
-    --bash
+```
+
+2. Install dependencies
+```bash
    composer install
    npm install
+```
+
 3. Set up the environment
-    --bash
+```bash
    cp .env.example .env
-   php artisan key: generate
-4. Configure database open '.env' and set:
-    DB_DATABASE=clinic_db
-    DB_USERNAME=root
-    DB_PASSWORD=
-5. Run migrations
-    --bash
+   php artisan key:generate
+```
+4. Configure database — open `.env` and set:
+```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=clinic_db
+   DB_USERNAME=root
+   DB_PASSWORD=
+```
+5. Run migrations and seeders
+```bash
    php artisan migrate
-6. Start the Server
-    --bash
+   php artisan db:seed
+```
+
+6. Start the server
+```bash
    php artisan serve
    npm run dev
+```
+
 7. Visit 'http://127.0.0.1:8000'
 
+### Demo Login Credentials
+| Role         | Email                    | Password    |
+|--------------|--------------------------|-------------|
+| Admin        | admin@test.com           | password123 |
+| Doctor       | doctor@test.com          | password123 |
+| Nurse        | nurse@test.com           | password123 |
+| Receptionist | receptionist@test.com    | password123 |
 ---
 
 ## Screenshots
+
+> _Screenshots will be added after final demo build is confirmed._
+
+### Dashboard Overview
+<!-- Add screenshot here -->
+
+### Patient Management
+<!-- Add screenshot here -->
+
+### Appointment & Queue
+<!-- Add screenshot here -->
+
+### Billing & Payments
+<!-- Add screenshot here -->
 
 ## ERD
 <img width="1048" height="2171" alt="ERDWEBPROJECT drawio" src="https://github.com/user-attachments/assets/461cbab0-4cc6-43f4-b4e5-aedee6576029" />
