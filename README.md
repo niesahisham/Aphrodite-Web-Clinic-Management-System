@@ -158,8 +158,6 @@ The clinic management system is a web-based solution to improve the efficiency a
 
 ## Screenshots
 
-> _Screenshots will be added after final demo build is confirmed._
-
 ### Login & Registration
 ![Login Page](public/screenshots/login.png)
 
