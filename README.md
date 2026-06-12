@@ -1,4 +1,4 @@
-exit# Clinic Management System
+# Clinic Management System
 
 **Group:** Aphrodite
 
