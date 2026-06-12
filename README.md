@@ -10,7 +10,7 @@
 | Name                                     | Matric No | Role                            |
 |------------------------------------------|-----------|---------------------------------|
 | Putri Aimi Batrisyia Binti Muhammad Yusri|  2320206  | Dashboard, Billing & Integration|
-| Niesa Batrisyia Binti Nor Hisham         | 2419714   | Appointment & Queue             |
+| Niesa Batrisyia Binti Nor Hisham         | 2419714   | Appointment, Medical Records & Queue             |
 | Nurin Sofina Binti Yusdi                 | 2221372   | Patient Management              |
 | Nurul Aida Fatini Binti Mohd Rosli       | 2410416   | Authentication & Security       |
 | Nur Adawiyah Binti Zakaria               | 2417438   |  Prescriptions & Medications    |
