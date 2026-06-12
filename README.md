@@ -170,10 +170,11 @@ The clinic management system is a web-based solution to improve the efficiency a
 ![Audit Logs](public/screenshots/auditlog.png)
 
 ### Dashboard Overview
-<!-- Add screenshot here -->
+<!-- Add screenshot here --> 
 
 ### Patient Management
-<!-- Add screenshot here -->
+<img width="1184" height="664" alt="2EA32056-AC60-46C2-A8B0-1764241D199B_1_105_c" src="https://github.com/user-attachments/assets/52ef053b-d2db-47e3-bd8d-18ce8e2895ef" />
+
 
 ### Appointment & Queue
 <!-- Add screenshot here -->
