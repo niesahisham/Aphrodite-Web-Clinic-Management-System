@@ -180,7 +180,11 @@ The clinic management system is a web-based solution to improve the efficiency a
 <!-- Add screenshot here -->
 
 ### Billing & Payments
-<!-- Add screenshot here -->
+<img width="1280" height="686" alt="image" src="https://github.com/user-attachments/assets/af2684a2-9a33-478e-82e7-8078fa493eae" />
+
+<img width="1280" height="690" alt="image" src="https://github.com/user-attachments/assets/a6cd8019-be44-4c42-9f52-0fd767d5cae0" />
+
+
 
 ## ERD
 <img width="1048" height="2171" alt="ERDWEBPROJECT drawio" src="https://github.com/user-attachments/assets/461cbab0-4cc6-43f4-b4e5-aedee6576029" />
