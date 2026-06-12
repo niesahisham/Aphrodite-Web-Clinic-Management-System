@@ -22,6 +22,12 @@
     </div>
     @endif
 
+    @if(session('error'))
+        <div class="alert alert-danger d-flex align-items-center" role="alert" style="color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; padding: 15px; border-radius: 5px; margin-bottom: 20px; font-weight: bold;">
+            <span>{{ session('error') }}</span>
+        </div>
+    @endif
+
     <form action="{{ route('prescriptions.store') }}" method="POST">
         @csrf
         <div style="margin-bottom: 15px;">

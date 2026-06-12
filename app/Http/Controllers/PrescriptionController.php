@@ -6,6 +6,7 @@ use App\Models\Prescription;
 use App\Models\Patient;
 use App\Models\Drug;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PrescriptionController extends Controller
 {
@@ -15,7 +16,7 @@ class PrescriptionController extends Controller
     public function index()
     {
         // 🌟 FIXED: Eager load the nested relationship path (patient, items, and item drugs)
-        $prescriptions = Prescription::with(['patient', 'items.drug'])->get();
+        $prescriptions = Prescription::with(['patient', 'items.drug'])->latest()->get();
         return view('prescriptions.index', compact('prescriptions'));
     }
 
@@ -106,6 +107,8 @@ class PrescriptionController extends Controller
      */
     public function destroy(Prescription $prescription)
     {
-        //
+        $prescription->delete();
+        return redirect()->route('prescriptions.index')
+            ->with('success', 'Prescription log deleted successfully.');
     }
 }
