@@ -1,12 +1,14 @@
 # Clinic Management System
-
-**Group:** Aphrodite
-
-**Video Presentation Link:** https://youtu.be/92ZxZcVoOBA
-
 **Course:** BIIT 2305 Web Application and Development - Section 02
 
 **Submission Date:** 12th June 2026 (11.59 PM)
+
+**Group:** Aphrodite
+
+**Github Link:** https://github.com/niesahisham/Aphrodite-Web-Clinic-Management-System
+
+**Video Presentation Link:** https://youtu.be/92ZxZcVoOBA
+
 
 ## 👨‍💻 Team Members
 | Name                                     | Matric No | Role                            |
