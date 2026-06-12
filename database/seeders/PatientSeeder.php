@@ -73,7 +73,10 @@ class PatientSeeder extends Seeder
         ];
 
         foreach ($patients as $patient) {
-            Patient::create($patient);
+        Patient::updateOrCreate(
+            ['patient_code' => $patient['patient_code']],
+            $patient
+            );
         }
     }
 }
