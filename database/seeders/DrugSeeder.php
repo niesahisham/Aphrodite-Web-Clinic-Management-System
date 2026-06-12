@@ -48,6 +48,13 @@ class DrugSeeder extends Seeder
                 'dosage_form' => 'Tablet',
                 'strength' => '500mg',
                 'unit_price' => '1.50'
+            ],
+            [
+                'name' => 'Penicillin',
+                'category' => 'Antibiotic',
+                'dosage_form' => 'Tablet',
+                'strength' => '250mg',
+                'unit_price' => '1.50'
             ]
         ];
 
