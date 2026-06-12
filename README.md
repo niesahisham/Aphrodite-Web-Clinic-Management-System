@@ -175,9 +175,12 @@ The clinic management system is a web-based solution to improve the efficiency a
 ### Patient Management
 <img width="1184" height="664" alt="2EA32056-AC60-46C2-A8B0-1764241D199B_1_105_c" src="https://github.com/user-attachments/assets/52ef053b-d2db-47e3-bd8d-18ce8e2895ef" />
 
+### Medical Records
+![Electronic Medical Records](emr.png)
 
 ### Appointment & Queue
-<!-- Add screenshot here -->
+![Appointment Management](screenshots/appt.png)
+![Queue Management](screenshots/queue.png)
 
 ### Billing & Payments
 <img width="1280" height="647" alt="image" src="https://github.com/user-attachments/assets/2980633e-8a05-44d7-acf4-0e528560157d" />
